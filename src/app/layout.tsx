@@ -1,41 +1,36 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Rajdhani } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import WhatsAppButton from "@/components/common/WhatsAppButton";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const rajdhani = Rajdhani({
   subsets: ["latin"],
+  weight: ["700"],
+  variable: "--font-rajdhani",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Quantic | Security & Technology Solutions",
-  description:
-    "Quantic provides cutting-edge security cameras, CCTV systems, alarm systems, fiber optic installation, and technology maintenance. Brands include Tiandy, Dahua, TvT and more.",
-  keywords:
-    "security cameras, CCTV, Tiandy, Dahua, TvT, DVR, NVR, alarm system, fiber optic, FTTH, surveillance",
+  title: "Quantic Technology — Security Solutions UAE",
+  description: "Professional CCTV, IP cameras, fiber optic installation, and network infrastructure solutions in UAE. Authorized dealer for Tiandy, Dahua, and TVT.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col bg-[#0a0a0f] text-white">
+    <html lang="en" className={`${inter.variable} ${rajdhani.variable} dark`} suppressHydrationWarning>
+      <body className="font-sans antialiased bg-[#050508] text-white">
         <Navbar />
-        <main className="flex-1">{children}</main>
+        <main>{children}</main>
         <Footer />
+        <WhatsAppButton />
       </body>
     </html>
   );

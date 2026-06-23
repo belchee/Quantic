@@ -1,53 +1,33 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0f;
+  --background: #050508;
   --foreground: #ffffff;
-  --primary: #00d4ff;
-  --primary-dark: #0099cc;
-  --secondary: #1a1a2e;
-  --accent: #16213e;
-  --card: #0f1117;
-  --border: #1e2030;
-  --muted: #8892a4;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
+* { box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: var(--primary);
+  background: #00c8ff;
   color: #000;
 }
 
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--background);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 3px;
-}
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--background); }
+::-webkit-scrollbar-thumb { background: #00c8ff; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #0066ff; }
