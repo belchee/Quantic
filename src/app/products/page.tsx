@@ -1,119 +1,83 @@
-import type { Metadata } from "next";
-import CTASection from "@/components/home/CTASection";
-import { Package } from "lucide-react";
-
-export const metadata: Metadata = { title: "Products" };
+"use client";
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { MessageCircle } from 'lucide-react';
 
 const brands = [
   {
-    name: "Tiandy",
-    tagline: "AI-Powered Surveillance",
-    color: "#00c8ff",
-    categories: [
-      { name: "Bullet Cameras", count: "Coming Soon", desc: "Fixed IP cameras for wide-area outdoor monitoring." },
-      { name: "Dome Cameras", count: "Coming Soon", desc: "Vandal-resistant dome cameras for indoor and outdoor use." },
-      { name: "PTZ Cameras", count: "Coming Soon", desc: "Pan-tilt-zoom cameras for large perimeter coverage." },
-      { name: "NVR Recorders", count: "Coming Soon", desc: "High-capacity network video recorders." },
-    ],
+    name: 'Tiandy',
+    gradient: 'from-[#00c8ff] to-[#0066ff]',
+    desc: 'AI-powered surveillance cameras, NVR systems, and smart analytics solutions. Industry-leading performance with deep learning technology.',
+    products: ['AI Cameras', 'Thermal Cameras', 'NVR Systems', 'PTZ Cameras', 'Fisheye Cameras', 'Video Wall Controllers'],
   },
   {
-    name: "Dahua",
-    tagline: "Smart IoT Solutions",
-    color: "#0066ff",
-    categories: [
-      { name: "WizSense Cameras", count: "Coming Soon", desc: "AI-powered cameras with human & vehicle detection." },
-      { name: "Alarm Systems", count: "Coming Soon", desc: "Smart alarm panels with app control." },
-      { name: "Access Control", count: "Coming Soon", desc: "Biometric and card-based access solutions." },
-      { name: "Video Intercoms", count: "Coming Soon", desc: "IP video door stations and indoor monitors." },
-    ],
+    name: 'Dahua',
+    gradient: 'from-[#0066ff] to-[#6600ff]',
+    desc: 'World-class video-centric smart IoT solutions. Comprehensive product range from entry-level to enterprise-grade systems.',
+    products: ['IP Cameras', 'DVR/NVR Systems', 'Access Control', 'Video Intercoms', 'Perimeter Protection', 'Smart Home Devices'],
   },
   {
-    name: "TVT",
-    tagline: "Professional CCTV",
-    color: "#7c3aed",
-    categories: [
-      { name: "IP Cameras", count: "Coming Soon", desc: "Full HD and 4K network cameras." },
-      { name: "HD-TVI Cameras", count: "Coming Soon", desc: "Analog HD cameras for budget installations." },
-      { name: "DVR Systems", count: "Coming Soon", desc: "Digital video recorders for analog cameras." },
-      { name: "NVR Systems", count: "Coming Soon", desc: "Network recorders for IP camera systems." },
-    ],
+    name: 'TVT',
+    gradient: 'from-[#00c8ff] to-[#00ff88]',
+    desc: 'Professional HD surveillance systems delivering excellent value. Reliable performance for residential and commercial applications.',
+    products: ['HD Cameras', 'DVR Systems', 'IP Cameras', 'NVR Recorders', 'Dome Cameras', 'Bullet Cameras'],
   },
 ];
 
 export default function ProductsPage() {
   return (
-    <>
-      {/* Hero */}
-      <section className="relative pt-36 pb-20 bg-[#050508] overflow-hidden">
-        <div className="absolute top-0 left-1/3 w-[600px] h-[300px] bg-[#7c3aed] opacity-[0.04] rounded-full blur-[120px]" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-[#00c8ff] text-sm font-semibold uppercase tracking-widest mb-4">Product Catalog</p>
-          <h1 className="text-5xl lg:text-6xl font-extrabold text-white mb-6">
-            Our{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00c8ff] to-[#0066ff]">
-              Products
-            </span>
-          </h1>
-          <p className="text-[#7a8499] text-lg max-w-2xl mx-auto mb-6">
-            We carry full product lines from Tiandy, Dahua, and TVT. Our
-            catalog is being built — contact us for current stock, pricing, and
-            availability.
-          </p>
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#f59e0b]/30 bg-[#f59e0b]/5 text-[#f59e0b] text-sm font-medium">
-            <Package className="w-4 h-4" />
-            Full catalog coming soon — contact us for product enquiries
-          </div>
+    <div className="min-h-screen bg-[#050508]">
+      <section className="relative pt-32 pb-16 overflow-hidden">
+        <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at 50% 50%, rgba(0,200,255,0.06) 0%, transparent 60%)' }} />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#00c8ff]/30 bg-[#00c8ff]/10 text-[#00c8ff] text-sm font-medium mb-6">
+              Product Catalog
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Our <span className="bg-gradient-to-r from-[#00c8ff] to-[#0066ff] bg-clip-text text-transparent">Products</span>
+            </h1>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 text-sm font-medium mt-4">
+              Full catalog being updated — contact us for the latest pricing
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Brand sections */}
-      <section className="py-20 bg-[#080810]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-          {brands.map((brand) => (
-            <div key={brand.name}>
-              {/* Brand header */}
-              <div className="flex items-end gap-4 mb-8">
-                <h2 className="text-4xl font-black" style={{ color: brand.color }}>{brand.name}</h2>
-                <span className="text-[#7a8499] text-sm font-medium mb-1 uppercase tracking-wider">
-                  — {brand.tagline}
-                </span>
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          {brands.map((brand, i) => (
+            <motion.div
+              key={brand.name}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              viewport={{ once: true }}
+              className="bg-[#0d0d14] border border-[#1a1a2a] rounded-2xl p-8"
+            >
+              <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-6">
+                <div className={`text-5xl font-bold bg-gradient-to-r ${brand.gradient} bg-clip-text text-transparent`}>
+                  {brand.name}
+                </div>
+                <div className="flex-1">
+                  <p className="text-[#7a8499]">{brand.desc}</p>
+                </div>
+                <Link href="/contact" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-white text-sm font-semibold bg-gradient-to-r from-[#00c8ff] to-[#0066ff] hover:opacity-90 transition-opacity whitespace-nowrap">
+                  <MessageCircle className="w-4 h-4" />
+                  Contact for Pricing
+                </Link>
               </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                {brand.categories.map((cat) => (
-                  <div
-                    key={cat.name}
-                    className="group bg-[#0d0d14] border border-white/6 rounded-2xl p-6 hover:border-white/12 transition-all overflow-hidden relative"
-                  >
-                    <div
-                      className="absolute top-0 left-0 right-0 h-0.5"
-                      style={{ background: `linear-gradient(to right, transparent, ${brand.color}60, transparent)` }}
-                    />
-                    {/* Image placeholder */}
-                    <div
-                      className="h-28 rounded-xl mb-4 flex items-center justify-center"
-                      style={{ background: `${brand.color}08`, border: `1px solid ${brand.color}15` }}
-                    >
-                      <Package className="w-10 h-10 opacity-30" style={{ color: brand.color }} />
-                    </div>
-                    <h3 className="text-white font-semibold mb-1">{cat.name}</h3>
-                    <p className="text-[#7a8499] text-xs leading-relaxed mb-3">{cat.desc}</p>
-                    <a
-                      href="/contact"
-                      className="text-xs font-semibold transition-colors"
-                      style={{ color: brand.color }}
-                    >
-                      Contact for pricing →
-                    </a>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+                {brand.products.map((product) => (
+                  <div key={product} className="bg-[#050508] border border-[#1a1a2a] rounded-xl px-3 py-3 text-center text-sm text-[#7a8499]">
+                    {product}
                   </div>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
-
-      <CTASection />
-    </>
+    </div>
   );
 }

@@ -1,104 +1,95 @@
-import type { Metadata } from "next";
-import { Camera, Aperture, Server, ShieldAlert, Zap, Wifi, Network, Wrench, CheckCircle } from "lucide-react";
-import SectionHeader from "@/components/common/SectionHeader";
-import CTASection from "@/components/home/CTASection";
-import { services } from "@/data/services";
-
-export const metadata: Metadata = { title: "Services" };
+"use client";
+import { motion } from 'framer-motion';
+import { Camera, Video, HardDrive, Bell, Zap, Network, Server, Wrench, CheckCircle2 } from 'lucide-react';
+import SectionHeader from '@/components/common/SectionHeader';
+import { services } from '@/data/services';
+import React from 'react';
 
 const iconMap: Record<string, React.ElementType> = {
-  Camera, Aperture, Server, ShieldAlert, Zap, Wifi, Network, Wrench,
+  Camera, Video, HardDrive, Bell, Zap, Network, Server, Wrench,
 };
 
 const steps = [
-  { step: "01", title: "Consultation", desc: "Free on-site assessment to understand your security needs and environment." },
-  { step: "02", title: "Design", desc: "We design a tailored solution with equipment recommendations and full pricing." },
-  { step: "03", title: "Installation", desc: "Certified technicians install and configure all equipment cleanly and professionally." },
-  { step: "04", title: "Support", desc: "Ongoing support, maintenance, and upgrades to keep your system running perfectly." },
+  { num: '01', title: 'Site Assessment', desc: 'Free on-site survey to understand your security needs and environment.' },
+  { num: '02', title: 'Custom Design', desc: 'Tailored system design with the right equipment for your requirements.' },
+  { num: '03', title: 'Professional Install', desc: 'Certified technicians install your system to the highest standards.' },
+  { num: '04', title: 'Training & Support', desc: 'Full training and ongoing 24/7 support for complete peace of mind.' },
 ];
 
 export default function ServicesPage() {
   return (
-    <>
-      {/* Hero */}
-      <section className="relative pt-36 pb-20 bg-[#050508] overflow-hidden">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#0066ff] opacity-[0.04] rounded-full blur-[120px]" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-[#00c8ff] text-sm font-semibold uppercase tracking-widest mb-4">What We Do</p>
-          <h1 className="text-5xl lg:text-6xl font-extrabold text-white mb-6">
-            Our{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00c8ff] to-[#0066ff]">
-              Services
-            </span>
-          </h1>
-          <p className="text-[#7a8499] text-lg max-w-2xl mx-auto">
-            End-to-end security and technology services delivered by certified
-            professionals with over a decade of hands-on experience.
-          </p>
+    <div className="min-h-screen bg-[#050508]">
+      <section className="relative pt-32 pb-16 overflow-hidden">
+        <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at 70% 50%, rgba(0,102,255,0.08) 0%, transparent 60%)' }} />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#00c8ff]/30 bg-[#00c8ff]/10 text-[#00c8ff] text-sm font-medium mb-6">
+              What We Do
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Our <span className="bg-gradient-to-r from-[#00c8ff] to-[#0066ff] bg-clip-text text-transparent">Services</span>
+            </h1>
+            <p className="text-[#7a8499] text-lg max-w-2xl mx-auto">
+              Comprehensive security and technology solutions designed to protect your property and optimize your network infrastructure.
+            </p>
+          </motion.div>
         </div>
       </section>
 
-      {/* Services Grid */}
-      <section className="py-20 bg-[#080810]">
+      <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {services.map((svc) => {
-              const Icon = iconMap[svc.icon];
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {services.map((service, i) => {
+              const Icon = iconMap[service.icon];
               return (
-                <div
-                  key={svc.id}
-                  className="relative bg-[#0d0d14] border border-white/6 rounded-2xl p-8 hover:border-white/12 transition-all overflow-hidden group"
+                <motion.div
+                  key={service.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: (i % 2) * 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-[#0d0d14] border border-[#1a1a2a] rounded-2xl p-8 hover:border-[#00c8ff]/30 transition-all group"
                 >
-                  <div
-                    className="absolute top-0 left-0 right-0 h-px rounded-t-2xl"
-                    style={{ background: `linear-gradient(to right, transparent, ${svc.color}, transparent)` }}
-                  />
-                  <div className="flex items-start gap-5 mb-6">
-                    <div className="w-14 h-14 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: `${svc.color}15` }}>
-                      <Icon className="w-7 h-7" style={{ color: svc.color }} />
+                  <div className="flex items-start gap-4 mb-6">
+                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#00c8ff]/10 to-[#0066ff]/10 border border-[#00c8ff]/20 flex items-center justify-center flex-shrink-0">
+                      {Icon && <Icon className="w-7 h-7 text-[#00c8ff]" />}
                     </div>
                     <div>
-                      <h2 className="text-white font-bold text-xl mb-1">{svc.title}</h2>
-                      <p className="text-[#7a8499] text-sm leading-relaxed">{svc.shortDesc}</p>
+                      <h3 className="text-white text-xl font-bold mb-1">{service.title}</h3>
+                      <p className="text-[#7a8499] text-sm">{service.description}</p>
                     </div>
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    {svc.features.map((f) => (
-                      <div key={f} className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 mt-0.5 shrink-0" style={{ color: svc.color }} />
-                        <span className="text-[#7a8499] text-sm">{f}</span>
-                      </div>
+                  <ul className="grid grid-cols-2 gap-2">
+                    {service.features.map((feature) => (
+                      <li key={feature} className="flex items-center gap-2 text-sm text-[#7a8499]">
+                        <CheckCircle2 className="w-4 h-4 text-[#00c8ff] flex-shrink-0" />
+                        {feature}
+                      </li>
                     ))}
-                  </div>
-                </div>
+                  </ul>
+                </motion.div>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* Process */}
-      <section className="py-20 bg-[#050508]">
+      <section className="py-20 bg-[#0d0d14]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader badge="How We Work" title="Our" highlight="Process" />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {steps.map((s, i) => (
-              <div key={s.step} className="relative">
-                {i < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-8 left-full w-full h-px bg-gradient-to-r from-[#00c8ff]/30 to-transparent z-10" />
-                )}
-                <div className="bg-[#0d0d14] border border-white/6 rounded-2xl p-6 hover:border-white/12 transition-all">
-                  <div className="text-4xl font-black text-[#00c8ff]/20 mb-4">{s.step}</div>
-                  <h3 className="text-white font-semibold text-lg mb-2">{s.title}</h3>
-                  <p className="text-[#7a8499] text-sm leading-relaxed">{s.desc}</p>
+          <SectionHeader badge="How We Work" title="Our" highlight="Process" subtitle="A simple, transparent process from first contact to ongoing support." />
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            {steps.map((step, i) => (
+              <motion.div key={step.num} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.1 }} viewport={{ once: true }} className="text-center">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#00c8ff] to-[#0066ff] flex items-center justify-center mx-auto mb-4 text-white font-bold text-xl">
+                  {step.num}
                 </div>
-              </div>
+                <h3 className="text-white font-semibold mb-2">{step.title}</h3>
+                <p className="text-[#7a8499] text-sm">{step.desc}</p>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
-
-      <CTASection />
-    </>
+    </div>
   );
 }

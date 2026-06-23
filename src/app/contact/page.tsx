@@ -1,114 +1,127 @@
-import type { Metadata } from "next";
-import { Phone, Mail, MapPin, Clock, ShieldCheck } from "lucide-react";
-import ContactForm from "@/components/contact/ContactForm";
+"use client";
+import { motion } from 'framer-motion';
+import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 
-export const metadata: Metadata = { title: "Contact Us" };
-
-const contactCards = [
-  { icon: Phone, label: "Phone", value: "+1 (555) 000-0000", sub: "Mon–Fri, 8am–6pm", color: "#00c8ff" },
-  { icon: Mail, label: "Email", value: "info@quantic.com", sub: "Reply within 24 hours", color: "#0066ff" },
-  { icon: MapPin, label: "Address", value: "Your City, Country", sub: "Visit our showroom", color: "#7c3aed" },
-  { icon: Clock, label: "Support", value: "24 / 7", sub: "Emergency line available", color: "#10b981" },
+const contactInfo = [
+  { icon: Phone, title: 'Phone', value: '+971 XX XXX XXXX', sub: 'Mon-Sat, 8am-6pm' },
+  { icon: Mail, title: 'Email', value: 'info@quantictech.ae', sub: 'We reply within 24 hours' },
+  { icon: MapPin, title: 'Address', value: 'Abu Dhabi, UAE', sub: 'Serving all UAE Emirates' },
+  { icon: Clock, title: 'Hours', value: '24/7 Support', sub: 'Emergency response available' },
 ];
 
 export default function ContactPage() {
   return (
-    <>
-      {/* Hero */}
-      <section className="relative pt-36 pb-20 bg-[#050508] overflow-hidden">
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] bg-[#00c8ff] opacity-[0.04] rounded-full blur-[100px]" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-[#00c8ff] text-sm font-semibold uppercase tracking-widest mb-4">Get in Touch</p>
-          <h1 className="text-5xl lg:text-6xl font-extrabold text-white mb-6">
-            Contact{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00c8ff] to-[#0066ff]">
-              Us
-            </span>
-          </h1>
-          <p className="text-[#7a8499] text-lg max-w-xl mx-auto">
-            Have a question or ready to get started? Our team will respond
-            promptly to help you find the right solution.
-          </p>
+    <div className="min-h-screen bg-[#050508]">
+      <section className="relative pt-32 pb-16 overflow-hidden">
+        <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at 60% 50%, rgba(0,102,255,0.07) 0%, transparent 60%)' }} />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#00c8ff]/30 bg-[#00c8ff]/10 text-[#00c8ff] text-sm font-medium mb-6">
+              Get In Touch
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Contact <span className="bg-gradient-to-r from-[#00c8ff] to-[#0066ff] bg-clip-text text-transparent">Us</span>
+            </h1>
+            <p className="text-[#7a8499] text-lg max-w-xl mx-auto">
+              Ready to secure your property? Get a free consultation from our security experts.
+            </p>
+          </motion.div>
         </div>
       </section>
 
-      {/* Contact info cards */}
-      <section className="py-12 bg-[#080810] border-y border-white/5">
+      <section className="pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {contactCards.map(({ icon: Icon, label, value, sub, color }) => (
-              <div
-                key={label}
-                className="relative bg-[#0d0d14] border border-white/6 rounded-2xl p-6 hover:border-white/12 transition-all overflow-hidden"
-              >
-                <div
-                  className="absolute top-0 left-0 right-0 h-0.5"
-                  style={{ background: `linear-gradient(to right, transparent, ${color}, transparent)` }}
-                />
-                <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: `${color}15` }}>
-                  <Icon className="w-5 h-5" style={{ color }} />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+            {contactInfo.map((item, i) => (
+              <motion.div key={item.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.1 }} viewport={{ once: true }} className="bg-[#0d0d14] border border-[#1a1a2a] rounded-2xl p-5 text-center">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00c8ff]/10 to-[#0066ff]/10 border border-[#00c8ff]/20 flex items-center justify-center mx-auto mb-3">
+                  <item.icon className="w-5 h-5 text-[#00c8ff]" />
                 </div>
-                <p className="text-[#7a8499] text-xs font-semibold uppercase tracking-widest mb-1">{label}</p>
-                <p className="text-white font-semibold text-lg leading-tight mb-1">{value}</p>
-                <p className="text-[#7a8499] text-xs">{sub}</p>
-              </div>
+                <div className="text-white font-semibold text-sm mb-1">{item.title}</div>
+                <div className="text-[#7a8499] text-xs">{item.value}</div>
+                <div className="text-[#7a8499] text-xs">{item.sub}</div>
+              </motion.div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Form + aside */}
-      <section className="py-20 bg-[#050508]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            {/* Form */}
-            <div className="lg:col-span-2">
-              <div className="bg-[#0d0d14] border border-white/6 rounded-3xl p-8">
-                <h2 className="text-white font-bold text-2xl mb-2">Send Us a Message</h2>
-                <p className="text-[#7a8499] text-sm mb-8">
-                  Fill out the form and we&apos;ll get back to you within 24 hours.
-                </p>
-                <ContactForm />
-              </div>
-            </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="lg:col-span-2 bg-[#0d0d14] border border-[#1a1a2a] rounded-2xl p-8">
+              <h2 className="text-white text-2xl font-bold mb-6">Send a Message</h2>
+              <form className="space-y-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm text-[#7a8499] mb-1.5">Full Name</label>
+                    <input type="text" placeholder="John Smith" className="w-full bg-[#050508] border border-[#1a1a2a] rounded-xl px-4 py-3 text-white text-sm placeholder-[#7a8499]/60 focus:outline-none focus:border-[#00c8ff]/50 transition-colors" />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-[#7a8499] mb-1.5">Email Address</label>
+                    <input type="email" placeholder="john@example.com" className="w-full bg-[#050508] border border-[#1a1a2a] rounded-xl px-4 py-3 text-white text-sm placeholder-[#7a8499]/60 focus:outline-none focus:border-[#00c8ff]/50 transition-colors" />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm text-[#7a8499] mb-1.5">Phone Number</label>
+                    <input type="tel" placeholder="+971 XX XXX XXXX" className="w-full bg-[#050508] border border-[#1a1a2a] rounded-xl px-4 py-3 text-white text-sm placeholder-[#7a8499]/60 focus:outline-none focus:border-[#00c8ff]/50 transition-colors" />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-[#7a8499] mb-1.5">Service Required</label>
+                    <select className="w-full bg-[#050508] border border-[#1a1a2a] rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-[#00c8ff]/50 transition-colors">
+                      <option value="">Select a service</option>
+                      <option>CCTV Surveillance</option>
+                      <option>IP Cameras</option>
+                      <option>DVR/NVR Systems</option>
+                      <option>Alarm Systems</option>
+                      <option>Fiber Optic Installation</option>
+                      <option>FTTH Maintenance</option>
+                      <option>Network Infrastructure</option>
+                      <option>Technology Maintenance</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm text-[#7a8499] mb-1.5">Message</label>
+                  <textarea rows={5} placeholder="Tell us about your project..." className="w-full bg-[#050508] border border-[#1a1a2a] rounded-xl px-4 py-3 text-white text-sm placeholder-[#7a8499]/60 focus:outline-none focus:border-[#00c8ff]/50 transition-colors resize-none" />
+                </div>
+                <button type="submit" className="w-full py-3.5 rounded-xl text-white font-semibold bg-gradient-to-r from-[#00c8ff] to-[#0066ff] hover:opacity-90 transition-opacity">
+                  Send Message
+                </button>
+              </form>
+            </motion.div>
 
-            {/* Aside */}
-            <div className="flex flex-col gap-6">
-              {/* Free assessment */}
-              <div className="relative bg-gradient-to-br from-[#00c8ff]/8 to-[#0066ff]/8 border border-[#00c8ff]/15 rounded-2xl p-6 overflow-hidden">
-                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#00c8ff]/40 to-transparent" />
-                <ShieldCheck className="w-10 h-10 text-[#00c8ff] mb-4" />
-                <h3 className="text-white font-bold text-xl mb-2">Free Site Assessment</h3>
-                <p className="text-[#7a8499] text-sm leading-relaxed">
-                  Not sure what you need? Our experts will visit your site,
-                  evaluate your requirements, and provide a detailed proposal at
-                  no cost.
-                </p>
-              </div>
-
-              {/* Response time */}
-              <div className="bg-[#0d0d14] border border-white/6 rounded-2xl p-6">
-                <h3 className="text-white font-semibold mb-4">What happens next?</h3>
-                <div className="space-y-4">
-                  {[
-                    "We review your message within 2 hours",
-                    "A specialist contacts you to discuss needs",
-                    "We schedule a free site visit",
-                    "You receive a detailed, no-obligation quote",
-                  ].map((step, i) => (
-                    <div key={step} className="flex items-start gap-3">
-                      <div className="w-6 h-6 rounded-full bg-[#00c8ff]/10 border border-[#00c8ff]/20 flex items-center justify-center shrink-0 text-[#00c8ff] text-xs font-bold">
-                        {i + 1}
-                      </div>
-                      <p className="text-[#7a8499] text-sm leading-relaxed">{step}</p>
-                    </div>
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} viewport={{ once: true }} className="space-y-4">
+              <div className="bg-gradient-to-br from-[#00c8ff]/10 to-[#0066ff]/10 border border-[#00c8ff]/20 rounded-2xl p-6">
+                <h3 className="text-white font-bold text-lg mb-2">Free Site Assessment</h3>
+                <p className="text-[#7a8499] text-sm mb-4">Our security experts will visit your site and provide a detailed assessment and quote — completely free of charge.</p>
+                <ul className="space-y-2 text-sm text-[#7a8499]">
+                  {['No obligation', 'Same-week availability', 'Detailed written quote', 'Expert recommendations'].map((item) => (
+                    <li key={item} className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#00c8ff]" />
+                      {item}
+                    </li>
                   ))}
+                </ul>
+              </div>
+              <div className="bg-[#0d0d14] border border-[#1a1a2a] rounded-2xl p-6">
+                <h4 className="text-white font-semibold mb-3">Business Hours</h4>
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between text-[#7a8499]">
+                    <span>Monday – Friday</span>
+                    <span>8:00 AM – 6:00 PM</span>
+                  </div>
+                  <div className="flex justify-between text-[#7a8499]">
+                    <span>Saturday</span>
+                    <span>9:00 AM – 4:00 PM</span>
+                  </div>
+                  <div className="flex justify-between text-[#7a8499]">
+                    <span>Emergency Support</span>
+                    <span className="text-green-400">24/7</span>
+                  </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

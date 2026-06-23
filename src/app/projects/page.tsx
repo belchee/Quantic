@@ -1,107 +1,82 @@
-import type { Metadata } from "next";
-import CTASection from "@/components/home/CTASection";
-import { projects } from "@/data/projects";
+"use client";
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { projects } from '@/data/projects';
 
-export const metadata: Metadata = { title: "Projects" };
+const categories = ['All', 'Residential', 'Commercial', 'Industrial'];
 
-const categories = ["All", "Residential", "Commercial", "Industrial"];
+const categoryColors: Record<string, string> = {
+  Commercial: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
+  Residential: 'bg-green-500/20 text-green-400 border-green-500/30',
+  Industrial: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
+};
 
 export default function ProjectsPage() {
+  const [active, setActive] = useState('All');
+  const filtered = active === 'All' ? projects : projects.filter(p => p.category === active);
+
   return (
-    <>
-      {/* Hero */}
-      <section className="relative pt-36 pb-20 bg-[#050508] overflow-hidden">
-        <div className="absolute top-0 right-1/4 w-[500px] h-[300px] bg-[#10b981] opacity-[0.04] rounded-full blur-[120px]" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-[#00c8ff] text-sm font-semibold uppercase tracking-widest mb-4">Portfolio</p>
-          <h1 className="text-5xl lg:text-6xl font-extrabold text-white mb-6">
-            Our{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00c8ff] to-[#0066ff]">
-              Projects
-            </span>
-          </h1>
-          <p className="text-[#7a8499] text-lg max-w-2xl mx-auto">
-            A selection of installations and deployments we&apos;ve completed for
-            clients across residential, commercial, and industrial sectors.
-          </p>
+    <div className="min-h-screen bg-[#050508]">
+      <section className="relative pt-32 pb-16 overflow-hidden">
+        <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at 30% 50%, rgba(0,200,255,0.07) 0%, transparent 60%)' }} />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#00c8ff]/30 bg-[#00c8ff]/10 text-[#00c8ff] text-sm font-medium mb-6">
+              Portfolio
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Our <span className="bg-gradient-to-r from-[#00c8ff] to-[#0066ff] bg-clip-text text-transparent">Projects</span>
+            </h1>
+            <p className="text-[#7a8499] text-lg max-w-2xl mx-auto">
+              A selection of our completed projects across residential, commercial, and industrial sectors.
+            </p>
+          </motion.div>
         </div>
       </section>
 
-      {/* Filter tabs */}
-      <section className="bg-[#080810] border-b border-white/5 sticky top-[72px] z-30">
+      <section className="pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-1 overflow-x-auto py-3">
-            {categories.map((cat, i) => (
+          <div className="flex flex-wrap gap-3 justify-center mb-12">
+            {categories.map((cat) => (
               <button
                 key={cat}
-                className={`px-5 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
-                  i === 0
-                    ? "bg-[#00c8ff]/10 text-[#00c8ff] border border-[#00c8ff]/20"
-                    : "text-[#7a8499] hover:text-white hover:bg-white/5"
-                }`}
+                onClick={() => setActive(cat)}
+                className={`px-5 py-2 rounded-xl text-sm font-medium transition-all ${active === cat ? 'bg-gradient-to-r from-[#00c8ff] to-[#0066ff] text-white' : 'border border-[#1a1a2a] text-[#7a8499] hover:text-white hover:border-white/20'}`}
               >
                 {cat}
               </button>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Projects grid */}
-      <section className="py-20 bg-[#080810]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project) => (
-              <div
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {filtered.map((project, i) => (
+              <motion.div
                 key={project.id}
-                className="group bg-[#0d0d14] border border-white/6 rounded-2xl overflow-hidden hover:border-white/12 transition-all duration-300"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: i * 0.08 }}
+                className="bg-[#0d0d14] border border-[#1a1a2a] rounded-2xl overflow-hidden group hover:border-[#00c8ff]/30 transition-all"
               >
-                {/* Visual */}
-                <div
-                  className="relative h-52 flex items-center justify-center overflow-hidden"
-                  style={{ background: `linear-gradient(135deg, ${project.color}15, #0d0d14)` }}
-                >
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{ background: `radial-gradient(circle at 50%, ${project.color}12, transparent 70%)` }}
-                  />
-                  <div className="text-7xl font-black select-none opacity-[0.07]" style={{ color: project.color }}>
-                    {String(project.id).padStart(2, "0")}
-                  </div>
-                  <span
-                    className="absolute top-4 left-4 text-xs font-semibold px-3 py-1 rounded-full"
-                    style={{
-                      backgroundColor: `${project.color}20`,
-                      color: project.color,
-                      border: `1px solid ${project.color}30`,
-                    }}
-                  >
+                <div className="aspect-video flex items-center justify-center" style={{ background: `radial-gradient(circle at 40% 50%, rgba(0,${80 + i * 20},255,0.1) 0%, #050508 70%)` }}>
+                  <div className="text-[#1a1a2a] text-7xl font-bold">{String(project.id).padStart(2, '0')}</div>
+                </div>
+                <div className="p-6">
+                  <span className={`text-xs px-2.5 py-1 rounded-full border font-medium ${categoryColors[project.category]}`}>
                     {project.category}
                   </span>
-                </div>
-
-                {/* Content */}
-                <div className="p-6">
-                  <h3 className="text-white font-semibold text-lg mb-2 group-hover:text-[#00c8ff] transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-[#7a8499] text-sm leading-relaxed mb-4">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
+                  <h3 className="text-white font-semibold mt-3 mb-2">{project.title}</h3>
+                  <p className="text-[#7a8499] text-sm">{project.description}</p>
+                  <div className="flex flex-wrap gap-2 mt-4">
                     {project.tags.map((tag) => (
-                      <span key={tag} className="text-xs text-[#7a8499] bg-white/5 border border-white/5 px-2.5 py-1 rounded-md">
-                        {tag}
-                      </span>
+                      <span key={tag} className="text-xs text-[#7a8499] bg-[#1a1a2a] px-2 py-1 rounded-md">{tag}</span>
                     ))}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
-
-      <CTASection />
-    </>
+    </div>
   );
 }
