@@ -1,5 +1,29 @@
 import Link from "next/link";
-import { Shield, Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin } from "lucide-react";
+
+function QuanticLogo({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 220 70"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      aria-label="Quantic"
+    >
+      <circle cx="24" cy="28" r="18" stroke="white" strokeWidth="5.5" fill="none" />
+      <path d="M 8 38 Q 24 56 40 38" stroke="white" strokeWidth="5.5" fill="none" strokeLinecap="round" />
+      <path d="M 50 10 L 50 38 Q 50 50 62 50 Q 74 50 74 38 L 74 10" stroke="white" strokeWidth="5.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M 84 50 L 98 10 L 112 50" stroke="white" strokeWidth="5.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <line x1="88" y1="36" x2="108" y2="36" stroke="white" strokeWidth="5.5" strokeLinecap="round" />
+      <path d="M 120 50 L 120 10 L 142 50 L 142 10" stroke="white" strokeWidth="5.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <line x1="152" y1="10" x2="174" y2="10" stroke="white" strokeWidth="5.5" strokeLinecap="round" />
+      <line x1="163" y1="10" x2="163" y2="50" stroke="white" strokeWidth="5.5" strokeLinecap="round" />
+      <path d="M 184 6 C 184 2 190 2 190 6 C 190 10 184 14 184 14 C 184 14 184 10 184 6 Z" fill="#e02020" transform="rotate(180 187 10)" />
+      <line x1="187" y1="22" x2="187" y2="50" stroke="white" strokeWidth="5.5" strokeLinecap="round" />
+      <path d="M 218 20 Q 210 10 198 10 Q 185 10 185 30 Q 185 50 198 50 Q 210 50 218 40" stroke="white" strokeWidth="5.5" fill="none" strokeLinecap="round" />
+    </svg>
+  );
+}
 
 const services = [
   "Security Cameras",
@@ -19,14 +43,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="col-span-1 lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-[#00d4ff] flex items-center justify-center">
-                <Shield className="w-5 h-5 text-black" />
-              </div>
-              <span className="text-xl font-bold">
-                <span className="text-white">Quan</span>
-                <span className="text-[#00d4ff]">tic</span>
-              </span>
+            <Link href="/" className="inline-block mb-4">
+              <QuanticLogo className="h-8 w-auto" />
             </Link>
             <p className="text-[#8892a4] text-sm leading-relaxed mb-6">
               Your trusted partner for professional security systems, fiber optic

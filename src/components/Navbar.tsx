@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Shield } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -11,6 +11,84 @@ const navLinks = [
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
+
+function QuanticLogo({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 220 70"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      aria-label="Quantic"
+    >
+      {/* ── Q ── custom with smile arc at bottom */}
+      {/* Outer circle */}
+      <circle cx="24" cy="28" r="18" stroke="white" strokeWidth="5.5" fill="none" />
+      {/* Smile arc below the circle */}
+      <path
+        d="M 8 38 Q 24 56 40 38"
+        stroke="white"
+        strokeWidth="5.5"
+        fill="none"
+        strokeLinecap="round"
+      />
+
+      {/* ── U ── */}
+      <path
+        d="M 50 10 L 50 38 Q 50 50 62 50 Q 74 50 74 38 L 74 10"
+        stroke="white"
+        strokeWidth="5.5"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+
+      {/* ── A ── */}
+      <path
+        d="M 84 50 L 98 10 L 112 50"
+        stroke="white"
+        strokeWidth="5.5"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <line x1="88" y1="36" x2="108" y2="36" stroke="white" strokeWidth="5.5" strokeLinecap="round" />
+
+      {/* ── N ── */}
+      <path
+        d="M 120 50 L 120 10 L 142 50 L 142 10"
+        stroke="white"
+        strokeWidth="5.5"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+
+      {/* ── T ── */}
+      <line x1="152" y1="10" x2="174" y2="10" stroke="white" strokeWidth="5.5" strokeLinecap="round" />
+      <line x1="163" y1="10" x2="163" y2="50" stroke="white" strokeWidth="5.5" strokeLinecap="round" />
+
+      {/* ── i ── (no dot — red teardrop replaces it) */}
+      {/* Red teardrop dot above i */}
+      <path
+        d="M 184 6 C 184 2 190 2 190 6 C 190 10 184 14 184 14 C 184 14 184 10 184 6 Z"
+        fill="#e02020"
+        transform="rotate(180 187 10)"
+      />
+      {/* i stem */}
+      <line x1="187" y1="22" x2="187" y2="50" stroke="white" strokeWidth="5.5" strokeLinecap="round" />
+
+      {/* ── C ── */}
+      <path
+        d="M 218 20 Q 210 10 198 10 Q 185 10 185 30 Q 185 50 198 50 Q 210 50 218 40"
+        stroke="white"
+        strokeWidth="5.5"
+        fill="none"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -32,14 +110,8 @@ export default function Navbar() {
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-lg bg-[#00d4ff] flex items-center justify-center group-hover:shadow-[0_0_20px_#00d4ff80] transition-all duration-300">
-            <Shield className="w-5 h-5 text-black" />
-          </div>
-          <span className="text-xl font-bold tracking-tight">
-            <span className="text-white">Quan</span>
-            <span className="text-[#00d4ff]">tic</span>
-          </span>
+        <Link href="/" className="flex items-center hover:opacity-80 transition-opacity duration-200">
+          <QuanticLogo className="h-9 w-auto" />
         </Link>
 
         {/* Desktop nav */}
