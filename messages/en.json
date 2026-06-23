@@ -1,0 +1,24 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "products": "Products",
+    "projects": "Projects",
+    "support": "Support",
+    "contact": "Contact",
+    "getQuote": "Get a Quote"
+  },
+  "hero": {
+    "badge": "Professional Security Solutions",
+    "title": "Advanced Security &\nNetwork Solutions",
+    "subtitle": "CCTV Surveillance • Alarm Systems • Fiber Optic Networks • FTTH Maintenance",
+    "cta1": "Get a Free Quote",
+    "cta2": "View Solutions"
+  },
+  "contact": {
+    "phone": "+383 45 460 460",
+    "email": "quanticshpk@gmail.com",
+    "location": "Prishtinë, Kosovo"
+  }
+}

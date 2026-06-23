@@ -1,0 +1,14 @@
+export interface Brand {
+  name: string;
+  tagline: string;
+  active: boolean;
+}
+
+export const brands: Brand[] = [
+  { name: "TIANDY", tagline: "AI-Powered Surveillance", active: true },
+  { name: "DAHUA", tagline: "Smart IoT Solutions", active: true },
+  { name: "TVT", tagline: "Professional CCTV", active: true },
+  { name: "HIKVISION", tagline: "Coming Soon", active: false },
+  { name: "UNIVIEW", tagline: "Coming Soon", active: false },
+  { name: "AJAX", tagline: "Coming Soon", active: false },
+];
