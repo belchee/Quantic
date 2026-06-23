@@ -9,12 +9,12 @@ import { services } from "@/lib/services";
 
 export default function Services() {
   return (
-    <section className="py-24 lg:py-32 bg-[#09090B]">
+    <section className="py-24 lg:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <SectionLabel>Our Services</SectionLabel>
           <h2
-            className="text-4xl lg:text-5xl font-bold text-white tracking-tight"
+            className="text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight"
             style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "-0.02em" }}
           >
             Complete Security &<br />Technology Solutions
@@ -40,23 +40,23 @@ export default function Services() {
                     <Icon className="w-5 h-5" style={{ color: svc.color }} />
                   </div>
                   <h3
-                    className="text-white font-semibold text-lg mb-2"
+                    className="text-gray-900 font-semibold text-lg mb-2"
                     style={{ fontFamily: "var(--font-space-grotesk)" }}
                   >
                     {svc.title}
                   </h3>
-                  <p className="text-zinc-500 text-sm mb-4 leading-relaxed">{svc.shortDesc}</p>
+                  <p className="text-gray-500 text-sm mb-4 leading-relaxed">{svc.shortDesc}</p>
                   <ul className="space-y-1.5 mb-5 flex-1">
                     {svc.features.slice(0, 4).map((f) => (
                       <li key={f} className="flex items-start gap-2">
-                        <CheckCircle className="w-3.5 h-3.5 text-cyan-400 mt-0.5 shrink-0" />
-                        <span className="text-zinc-400 text-xs">{f}</span>
+                        <CheckCircle className="w-3.5 h-3.5 text-blue-500 mt-0.5 shrink-0" />
+                        <span className="text-gray-600 text-xs">{f}</span>
                       </li>
                     ))}
                   </ul>
                   <Link
                     href={`/services/${svc.slug}`}
-                    className="text-sm text-blue-400 hover:text-blue-300 font-medium transition-colors mt-auto"
+                    className="text-sm text-blue-600 hover:text-blue-700 font-medium transition-colors mt-auto"
                   >
                     Learn More →
                   </Link>

@@ -10,8 +10,8 @@ export default function GlassCard({ children, className, hover = true }: GlassCa
   return (
     <div
       className={cn(
-        "bg-white/5 backdrop-blur-sm border border-white/8 rounded-2xl p-6",
-        hover && "hover:border-blue-500/30 hover:bg-white/8 hover:scale-[1.02] transition-all duration-300",
+        "bg-white rounded-2xl border border-gray-200 p-6 shadow-sm",
+        hover && "hover:shadow-md hover:-translate-y-0.5 transition-all duration-200",
         className
       )}
     >

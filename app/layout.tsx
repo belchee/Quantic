@@ -47,7 +47,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
-      <body className="bg-[#09090B] text-[#FAFAFA] font-sans antialiased">
+      <body className="bg-white text-gray-900 font-sans antialiased">
         <Navbar />
         <main>{children}</main>
         <Footer />

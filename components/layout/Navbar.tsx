@@ -16,12 +16,9 @@ const navLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
-const locales = ["EN", "SQ", "MK"];
-
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [locale, setLocale] = useState("EN");
   const pathname = usePathname();
 
   useEffect(() => {
@@ -35,14 +32,16 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-          scrolled ? "backdrop-blur-md bg-black/60 border-b border-white/8" : "bg-transparent"
+        className={`fixed top-0 inset-x-0 z-50 bg-white border-b border-gray-200 transition-all duration-300 ${
+          scrolled ? "shadow-sm" : ""
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center h-16 gap-6">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0 flex items-center">
-            <Image src="/quantic-logo.svg" height={32} width={140} alt="Quantic" priority />
+            <div className="bg-[#2563EB] px-3 py-1.5 rounded-lg">
+              <Image src="/quantic-logo.svg" height={28} width={120} alt="Quantic" priority />
+            </div>
           </Link>
 
           {/* Desktop nav */}
@@ -53,8 +52,8 @@ export default function Navbar() {
                 href={l.href}
                 className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 ${
                   pathname === l.href
-                    ? "text-white bg-white/10"
-                    : "text-zinc-400 hover:text-white hover:bg-white/5"
+                    ? "text-blue-600 bg-blue-50"
+                    : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
                 }`}
               >
                 {l.label}
@@ -64,25 +63,9 @@ export default function Navbar() {
 
           {/* Right side */}
           <div className="hidden lg:flex items-center gap-4 flex-shrink-0">
-            {/* Language switcher */}
-            <div className="flex items-center gap-1">
-              {locales.map((loc, i) => (
-                <span key={loc} className="flex items-center">
-                  {i > 0 && <span className="text-white/20 mx-0.5">|</span>}
-                  <button
-                    onClick={() => setLocale(loc)}
-                    className={`text-xs font-mono transition-colors ${
-                      locale === loc ? "text-cyan-400" : "text-zinc-500 hover:text-zinc-300"
-                    }`}
-                  >
-                    {loc}
-                  </button>
-                </span>
-              ))}
-            </div>
             <Link
               href="/contact"
-              className="px-4 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors"
+              className="px-4 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
             >
               Get a Quote
             </Link>
@@ -90,7 +73,7 @@ export default function Navbar() {
 
           {/* Mobile hamburger */}
           <button
-            className="lg:hidden ml-auto p-2 text-zinc-400 hover:text-white transition-colors"
+            className="lg:hidden ml-auto p-2 text-gray-600 hover:text-gray-900 transition-colors"
             onClick={() => setOpen(!open)}
             aria-label="Menu"
           >
@@ -99,18 +82,22 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Mobile full-screen overlay */}
+      {/* Mobile dropdown panel */}
       <div
-        className={`fixed inset-0 z-40 bg-[#09090B]/98 backdrop-blur-xl flex flex-col items-center justify-center transition-all duration-300 lg:hidden ${
+        className={`fixed inset-x-0 top-16 z-40 bg-white border-b border-gray-200 shadow-lg transition-all duration-300 lg:hidden ${
           open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
-        <nav className="flex flex-col items-center gap-6 text-center">
+        <nav className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1">
           {navLinks.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className="text-2xl font-semibold text-zinc-300 hover:text-white transition-colors"
+              className={`px-4 py-3 rounded-lg text-base font-medium transition-colors ${
+                pathname === l.href
+                  ? "text-blue-600 bg-blue-50"
+                  : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+              }`}
               onClick={() => setOpen(false)}
             >
               {l.label}
@@ -119,23 +106,10 @@ export default function Navbar() {
           <Link
             href="/contact"
             onClick={() => setOpen(false)}
-            className="mt-4 px-8 py-3 text-base font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-full transition-colors"
+            className="mt-2 px-4 py-3 text-base font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors text-center"
           >
             Get a Quote
           </Link>
-          <div className="flex items-center gap-3 mt-2">
-            {locales.map((loc, i) => (
-              <span key={loc} className="flex items-center gap-3">
-                {i > 0 && <span className="text-white/20">|</span>}
-                <button
-                  onClick={() => { setLocale(loc); }}
-                  className={`text-sm font-mono ${locale === loc ? "text-cyan-400" : "text-zinc-500"}`}
-                >
-                  {loc}
-                </button>
-              </span>
-            ))}
-          </div>
         </nav>
       </div>
     </>

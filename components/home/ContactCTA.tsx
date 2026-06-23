@@ -5,10 +5,10 @@ import Link from "next/link";
 
 export default function ContactCTA() {
   return (
-    <section className="py-24 lg:py-32 bg-[#09090B] relative overflow-hidden">
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-[600px] h-[400px] bg-blue-600/10 rounded-full blur-[120px]" />
-      </div>
+    <section className="py-24 lg:py-32 bg-blue-600 relative overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: "radial-gradient(ellipse at 50% 100%, rgba(255,255,255,0.05) 0%, transparent 60%)",
+      }} />
 
       <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
@@ -23,19 +23,19 @@ export default function ContactCTA() {
           >
             Ready to Secure Your Business?
           </h2>
-          <p className="text-zinc-400 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
+          <p className="text-blue-100 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
             Get a free consultation and custom quote from our team. We&apos;ll design the right solution for your needs.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/contact"
-              className="px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-base transition-all duration-200 shadow-[0_0_30px_rgba(37,99,235,0.4)] hover:shadow-[0_0_40px_rgba(37,99,235,0.6)]"
+              className="px-8 py-4 rounded-xl bg-white hover:bg-gray-50 text-blue-600 font-semibold text-base transition-all duration-200 shadow-sm"
             >
               Get a Free Quote
             </Link>
             <a
               href="tel:+38345460460"
-              className="px-8 py-4 rounded-xl border border-white/10 text-zinc-300 hover:text-white hover:border-white/20 font-semibold text-base transition-all duration-200"
+              className="px-8 py-4 rounded-xl border border-white/30 text-white hover:bg-white/10 font-semibold text-base transition-all duration-200"
             >
               Call Us →
             </a>

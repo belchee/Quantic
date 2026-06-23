@@ -33,19 +33,13 @@ export default async function ServicePage({ params }: Props) {
   const otherServices = services.filter((s) => s.slug !== slug).slice(0, 3);
 
   return (
-    <div className="bg-[#09090B] min-h-screen">
+    <div className="bg-white min-h-screen">
       {/* Hero */}
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div
-            className="w-[600px] h-[400px] rounded-full blur-[140px] opacity-10"
-            style={{ background: service.color }}
-          />
-        </div>
-        <div className="max-w-4xl mx-auto relative">
+      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gray-50 border-b border-gray-200">
+        <div className="max-w-4xl mx-auto">
           <Link
             href="/services"
-            className="inline-flex items-center gap-2 text-zinc-500 hover:text-zinc-300 text-sm mb-8 transition-colors"
+            className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-900 text-sm mb-8 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             All Services
@@ -58,29 +52,29 @@ export default async function ServicePage({ params }: Props) {
           </div>
           <SectionLabel>Service</SectionLabel>
           <h1
-            className="text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight"
+            className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 tracking-tight"
             style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "-0.02em" }}
           >
             {service.title}
           </h1>
-          <p className="text-zinc-400 text-xl max-w-2xl leading-relaxed">{service.description}</p>
+          <p className="text-gray-500 text-xl max-w-2xl leading-relaxed">{service.description}</p>
         </div>
       </section>
 
       {/* Features */}
-      <section className="py-16 bg-[#18181B]">
+      <section className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2
-            className="text-2xl font-bold text-white mb-8"
+            className="text-2xl font-bold text-gray-900 mb-8"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
             What&apos;s Included
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {service.features.map((f) => (
-              <div key={f} className="flex items-start gap-3 p-4 rounded-xl bg-white/3 border border-white/6">
-                <CheckCircle className="w-5 h-5 text-cyan-400 mt-0.5 shrink-0" />
-                <span className="text-zinc-300 text-sm">{f}</span>
+              <div key={f} className="flex items-start gap-3 p-4 rounded-xl bg-gray-50 border border-gray-200">
+                <CheckCircle className="w-5 h-5 text-blue-500 mt-0.5 shrink-0" />
+                <span className="text-gray-700 text-sm">{f}</span>
               </div>
             ))}
           </div>
@@ -88,7 +82,7 @@ export default async function ServicePage({ params }: Props) {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-[#09090B]">
+      <section className="py-16 bg-blue-600">
         <div className="max-w-2xl mx-auto px-4 text-center">
           <h2
             className="text-3xl font-bold text-white mb-4"
@@ -96,19 +90,19 @@ export default async function ServicePage({ params }: Props) {
           >
             Interested in {service.title}?
           </h2>
-          <p className="text-zinc-400 mb-8">
+          <p className="text-blue-100 mb-8">
             Contact us for a free consultation and custom quote tailored to your needs.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/contact"
-              className="px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-all duration-200"
+              className="px-8 py-4 rounded-xl bg-white hover:bg-gray-50 text-blue-600 font-semibold transition-all duration-200"
             >
               Get a Free Quote
             </Link>
             <a
               href="tel:+38345460460"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-white/10 text-zinc-300 hover:text-white hover:border-white/20 font-semibold transition-all duration-200"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-white/30 text-white hover:bg-white/10 font-semibold transition-all duration-200"
             >
               <Phone className="w-4 h-4" />
               +383 45 460 460
@@ -119,10 +113,10 @@ export default async function ServicePage({ params }: Props) {
 
       {/* Other Services */}
       {otherServices.length > 0 && (
-        <section className="py-16 bg-[#18181B]">
+        <section className="py-16 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2
-              className="text-2xl font-bold text-white mb-8"
+              className="text-2xl font-bold text-gray-900 mb-8"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
               Other Services
@@ -140,12 +134,12 @@ export default async function ServicePage({ params }: Props) {
                         <OtherIcon className="w-5 h-5" style={{ color: s.color }} />
                       </div>
                       <h3
-                        className="text-white font-semibold mb-2"
+                        className="text-gray-900 font-semibold mb-2"
                         style={{ fontFamily: "var(--font-space-grotesk)" }}
                       >
                         {s.title}
                       </h3>
-                      <p className="text-zinc-500 text-sm">{s.shortDesc}</p>
+                      <p className="text-gray-500 text-sm">{s.shortDesc}</p>
                     </GlassCard>
                   </Link>
                 );

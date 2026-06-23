@@ -39,7 +39,7 @@ export default function ContactPage() {
       label: "Email",
       value: "quanticshpk@gmail.com",
       href: "mailto:quanticshpk@gmail.com",
-      color: "#06B6D4",
+      color: "#2563EB",
     },
     {
       icon: MapPin,
@@ -58,28 +58,25 @@ export default function ContactPage() {
   ];
 
   return (
-    <div className="bg-[#09090B] min-h-screen">
+    <div className="bg-white min-h-screen">
       {/* Hero */}
-      <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-[600px] h-[400px] bg-blue-600/8 rounded-full blur-[140px]" />
-        </div>
-        <div className="max-w-4xl mx-auto text-center relative">
+      <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 bg-gray-50 border-b border-gray-200">
+        <div className="max-w-4xl mx-auto text-center">
           <SectionLabel>Get in Touch</SectionLabel>
           <h1
-            className="text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight"
+            className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 tracking-tight"
             style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "-0.02em" }}
           >
             Let&apos;s Talk
           </h1>
-          <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-500 text-lg max-w-2xl mx-auto">
             Ready for a free consultation? Contact us via phone, WhatsApp, or the form below.
           </p>
         </div>
       </section>
 
       {/* Content */}
-      <section className="pb-24 px-4 sm:px-6 lg:px-8">
+      <section className="pb-24 px-4 sm:px-6 lg:px-8 pt-12">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-8">
           {/* Contact info */}
           <div className="lg:col-span-2 space-y-4">
@@ -89,13 +86,13 @@ export default function ContactPage() {
                 <GlassCard className="flex items-center gap-4" hover={!!item.href}>
                   <div
                     className="w-11 h-11 rounded-full flex items-center justify-center shrink-0"
-                    style={{ background: `${item.color}15`, border: `1px solid ${item.color}30` }}
+                    style={{ background: `${item.color}10`, border: `1px solid ${item.color}25` }}
                   >
                     <Icon className="w-5 h-5" style={{ color: item.color }} />
                   </div>
                   <div>
-                    <p className="text-zinc-500 text-xs mb-0.5">{item.label}</p>
-                    <p className="text-white font-medium text-sm">{item.value}</p>
+                    <p className="text-gray-500 text-xs mb-0.5">{item.label}</p>
+                    <p className="text-gray-900 font-medium text-sm">{item.value}</p>
                   </div>
                 </GlassCard>
               );
@@ -114,10 +111,10 @@ export default function ContactPage() {
             })}
 
             {/* Map placeholder */}
-            <div className="bg-white/3 border border-white/8 rounded-2xl overflow-hidden h-48 flex items-center justify-center">
+            <div className="bg-gray-50 border border-gray-200 rounded-2xl overflow-hidden h-48 flex items-center justify-center">
               <div className="text-center">
-                <MapPin className="w-8 h-8 text-zinc-600 mx-auto mb-2" />
-                <p className="text-zinc-600 text-sm">Prishtinë, Kosovo</p>
+                <MapPin className="w-8 h-8 text-gray-400 mx-auto mb-2" />
+                <p className="text-gray-500 text-sm">Prishtinë, Kosovo</p>
               </div>
             </div>
           </div>
@@ -127,23 +124,23 @@ export default function ContactPage() {
             <GlassCard hover={false}>
               {submitted ? (
                 <div className="text-center py-12">
-                  <div className="w-16 h-16 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center mx-auto mb-4">
-                    <Send className="w-7 h-7 text-green-400" />
+                  <div className="w-16 h-16 rounded-full bg-green-50 border border-green-200 flex items-center justify-center mx-auto mb-4">
+                    <Send className="w-7 h-7 text-green-600" />
                   </div>
                   <h3
-                    className="text-white font-bold text-xl mb-2"
+                    className="text-gray-900 font-bold text-xl mb-2"
                     style={{ fontFamily: "var(--font-space-grotesk)" }}
                   >
                     Message Sent!
                   </h3>
-                  <p className="text-zinc-400 text-sm">
+                  <p className="text-gray-500 text-sm">
                     We&apos;ll get back to you within 2 hours. For urgent matters, call us directly.
                   </p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <h2
-                    className="text-white font-bold text-xl mb-6"
+                    className="text-gray-900 font-bold text-xl mb-6"
                     style={{ fontFamily: "var(--font-space-grotesk)" }}
                   >
                     Send a Message
@@ -151,7 +148,7 @@ export default function ContactPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-zinc-400 text-xs mb-1.5">Full Name *</label>
+                      <label className="block text-gray-600 text-xs mb-1.5 font-medium">Full Name *</label>
                       <input
                         type="text"
                         name="name"
@@ -159,11 +156,11 @@ export default function ContactPage() {
                         onChange={handleChange}
                         required
                         placeholder="Your name"
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-blue-500/50 transition-colors"
+                        className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 text-sm placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="block text-zinc-400 text-xs mb-1.5">Email *</label>
+                      <label className="block text-gray-600 text-xs mb-1.5 font-medium">Email *</label>
                       <input
                         type="email"
                         name="email"
@@ -171,45 +168,45 @@ export default function ContactPage() {
                         onChange={handleChange}
                         required
                         placeholder="your@email.com"
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-blue-500/50 transition-colors"
+                        className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 text-sm placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-colors"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-zinc-400 text-xs mb-1.5">Phone</label>
+                      <label className="block text-gray-600 text-xs mb-1.5 font-medium">Phone</label>
                       <input
                         type="tel"
                         name="phone"
                         value={form.phone}
                         onChange={handleChange}
                         placeholder="+383..."
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-blue-500/50 transition-colors"
+                        className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 text-sm placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="block text-zinc-400 text-xs mb-1.5">Subject *</label>
+                      <label className="block text-gray-600 text-xs mb-1.5 font-medium">Subject *</label>
                       <select
                         name="subject"
                         value={form.subject}
                         onChange={handleChange}
                         required
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-blue-500/50 transition-colors appearance-none"
+                        className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-colors appearance-none"
                       >
-                        <option value="" className="bg-zinc-900">Select a subject</option>
-                        <option value="cctv" className="bg-zinc-900">CCTV / Surveillance</option>
-                        <option value="alarm" className="bg-zinc-900">Alarm System</option>
-                        <option value="fiber" className="bg-zinc-900">Fiber Optic</option>
-                        <option value="network" className="bg-zinc-900">Network Infrastructure</option>
-                        <option value="maintenance" className="bg-zinc-900">Maintenance Contract</option>
-                        <option value="other" className="bg-zinc-900">Other</option>
+                        <option value="">Select a subject</option>
+                        <option value="cctv">CCTV / Surveillance</option>
+                        <option value="alarm">Alarm System</option>
+                        <option value="fiber">Fiber Optic</option>
+                        <option value="network">Network Infrastructure</option>
+                        <option value="maintenance">Maintenance Contract</option>
+                        <option value="other">Other</option>
                       </select>
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-zinc-400 text-xs mb-1.5">Message *</label>
+                    <label className="block text-gray-600 text-xs mb-1.5 font-medium">Message *</label>
                     <textarea
                       name="message"
                       value={form.message}
@@ -217,13 +214,13 @@ export default function ContactPage() {
                       required
                       rows={5}
                       placeholder="Describe your project or question..."
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-blue-500/50 transition-colors resize-none"
+                      className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 text-sm placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-colors resize-none"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full py-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-2"
+                    className="w-full py-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-2"
                   >
                     <Send className="w-4 h-4" />
                     Send Message

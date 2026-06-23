@@ -22,15 +22,17 @@ const serviceLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[#09090B] border-t border-white/6">
+    <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-5">
-              <Image src="/quantic-logo.svg" height={30} width={130} alt="Quantic" />
+              <div className="bg-[#2563EB] px-3 py-1.5 rounded-lg inline-block">
+                <Image src="/quantic-logo.svg" height={26} width={110} alt="Quantic" />
+              </div>
             </Link>
-            <p className="text-zinc-500 text-sm leading-relaxed mb-6">
+            <p className="text-gray-400 text-sm leading-relaxed mb-6">
               Professional security and network solutions for businesses and homes in
               Kosovo and Macedonia.
             </p>
@@ -54,7 +56,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {navLinks.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-zinc-500 text-sm hover:text-white transition-colors">
+                  <Link href={l.href} className="text-gray-400 text-sm hover:text-white transition-colors">
                     {l.label}
                   </Link>
                 </li>
@@ -68,7 +70,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {serviceLinks.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-zinc-500 text-sm hover:text-white transition-colors">
+                  <Link href={l.href} className="text-gray-400 text-sm hover:text-white transition-colors">
                     {l.label}
                   </Link>
                 </li>
@@ -81,34 +83,34 @@ export default function Footer() {
             <h3 className="text-white font-semibold text-sm mb-5 uppercase tracking-wider">Contact</h3>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
-                <Phone className="w-4 h-4 text-cyan-400 mt-0.5 shrink-0" />
-                <a href="tel:+38345460460" className="text-zinc-500 text-sm hover:text-white transition-colors">
+                <Phone className="w-4 h-4 text-blue-400 mt-0.5 shrink-0" />
+                <a href="tel:+38345460460" className="text-gray-400 text-sm hover:text-white transition-colors">
                   +383 45 460 460
                 </a>
               </li>
               <li className="flex items-start gap-3">
-                <Mail className="w-4 h-4 text-cyan-400 mt-0.5 shrink-0" />
-                <a href="mailto:quanticshpk@gmail.com" className="text-zinc-500 text-sm hover:text-white transition-colors break-all">
+                <Mail className="w-4 h-4 text-blue-400 mt-0.5 shrink-0" />
+                <a href="mailto:quanticshpk@gmail.com" className="text-gray-400 text-sm hover:text-white transition-colors break-all">
                   quanticshpk@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-cyan-400 mt-0.5 shrink-0" />
-                <span className="text-zinc-500 text-sm">Prishtinë, Kosovo</span>
+                <MapPin className="w-4 h-4 text-blue-400 mt-0.5 shrink-0" />
+                <span className="text-gray-400 text-sm">Prishtinë, Kosovo</span>
               </li>
               <li className="flex items-start gap-3">
-                <Clock className="w-4 h-4 text-cyan-400 mt-0.5 shrink-0" />
-                <span className="text-zinc-500 text-sm">Mon–Sat, 08:00–18:00</span>
+                <Clock className="w-4 h-4 text-blue-400 mt-0.5 shrink-0" />
+                <span className="text-gray-400 text-sm">Mon–Sat, 08:00–18:00</span>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-14 pt-8 border-t border-white/6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-zinc-600 text-sm">
+        <div className="mt-14 pt-8 border-t border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-gray-500 text-sm">
             © {new Date().getFullYear()} Quantic SHPK. All rights reserved.
           </p>
-          <p className="text-zinc-600 text-sm">Professional Security & Network Solutions · Kosovo</p>
+          <p className="text-gray-500 text-sm">Professional Security & Network Solutions · Kosovo</p>
         </div>
       </div>
     </footer>

@@ -28,12 +28,12 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="py-24 lg:py-32 bg-[#09090B]">
+    <section className="py-24 lg:py-32 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <SectionLabel>Client Reviews</SectionLabel>
           <h2
-            className="text-4xl lg:text-5xl font-bold text-white tracking-tight"
+            className="text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight"
             style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "-0.02em" }}
           >
             Trusted by Our Clients
@@ -50,22 +50,22 @@ export default function Testimonials() {
               transition={{ duration: 0.5, delay: i * 0.12 }}
             >
               <GlassCard className="h-full flex flex-col">
-                <Quote className="w-7 h-7 text-blue-400/30 mb-4" />
+                <Quote className="w-7 h-7 text-blue-200 mb-4" />
                 <div className="flex mb-4">
                   {Array.from({ length: 5 }).map((_, j) => (
                     <Star key={j} className="w-4 h-4 text-amber-400 fill-amber-400" />
                   ))}
                 </div>
-                <p className="text-zinc-400 text-sm leading-relaxed italic mb-6 flex-1">
+                <p className="text-gray-600 text-sm leading-relaxed italic mb-6 flex-1">
                   &ldquo;{t.text}&rdquo;
                 </p>
-                <div className="flex items-center gap-3 pt-4 border-t border-white/6">
-                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white text-xs font-bold shrink-0">
+                <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
+                  <div className="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold shrink-0">
                     {t.initials}
                   </div>
                   <div>
-                    <p className="text-white text-sm font-semibold">{t.name}</p>
-                    <p className="text-zinc-500 text-xs">{t.role}</p>
+                    <p className="text-gray-900 text-sm font-semibold">{t.name}</p>
+                    <p className="text-gray-500 text-xs">{t.role}</p>
                   </div>
                 </div>
               </GlassCard>

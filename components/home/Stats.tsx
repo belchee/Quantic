@@ -12,7 +12,7 @@ const stats = [
 
 export default function Stats() {
   return (
-    <section className="bg-zinc-900/50 border-y border-white/6 py-16">
+    <section className="bg-gray-50 border-y border-gray-200 py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((s, i) => (
@@ -25,12 +25,12 @@ export default function Stats() {
               className="text-center"
             >
               <div
-                className="text-5xl font-bold text-white mb-2"
+                className="text-5xl font-bold text-blue-600 mb-2"
                 style={{ fontFamily: "var(--font-space-grotesk)" }}
               >
                 <AnimatedCounter value={s.value} suffix={s.suffix} decimals={s.decimals ?? 0} />
               </div>
-              <p className="text-zinc-400 text-sm uppercase tracking-widest font-mono">{s.label}</p>
+              <p className="text-gray-500 text-sm uppercase tracking-widest font-medium">{s.label}</p>
             </motion.div>
           ))}
         </div>

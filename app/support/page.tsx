@@ -33,7 +33,7 @@ const supportOptions = [
     desc: "Send us a detailed description of your issue. We respond within 2 hours.",
     action: "mailto:quanticshpk@gmail.com",
     actionLabel: "quanticshpk@gmail.com",
-    color: "#06B6D4",
+    color: "#2563EB",
   },
 ];
 
@@ -58,28 +58,25 @@ const faq = [
 
 export default function SupportPage() {
   return (
-    <div className="bg-[#09090B] min-h-screen">
+    <div className="bg-white min-h-screen">
       {/* Hero */}
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-[600px] h-[400px] bg-cyan-500/6 rounded-full blur-[140px]" />
-        </div>
-        <div className="max-w-4xl mx-auto text-center relative">
+      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gray-50 border-b border-gray-200">
+        <div className="max-w-4xl mx-auto text-center">
           <SectionLabel>Support Center</SectionLabel>
           <h1
-            className="text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight"
+            className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 tracking-tight"
             style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "-0.02em" }}
           >
             We&apos;re Here to Help
           </h1>
-          <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-500 text-lg max-w-2xl mx-auto">
             24/7 technical support for all Quantic installations. Choose the fastest way to reach us.
           </p>
         </div>
       </section>
 
       {/* Support options */}
-      <section className="pb-20 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-5">
           {supportOptions.map((opt) => {
             const Icon = opt.icon;
@@ -87,17 +84,17 @@ export default function SupportPage() {
               <GlassCard key={opt.title} className="text-center flex flex-col items-center">
                 <div
                   className="w-14 h-14 rounded-full flex items-center justify-center mb-4"
-                  style={{ background: `${opt.color}15`, border: `1px solid ${opt.color}30` }}
+                  style={{ background: `${opt.color}10`, border: `1px solid ${opt.color}25` }}
                 >
                   <Icon className="w-6 h-6" style={{ color: opt.color }} />
                 </div>
                 <h3
-                  className="text-white font-semibold mb-2"
+                  className="text-gray-900 font-semibold mb-2"
                   style={{ fontFamily: "var(--font-space-grotesk)" }}
                 >
                   {opt.title}
                 </h3>
-                <p className="text-zinc-500 text-sm mb-4 flex-1">{opt.desc}</p>
+                <p className="text-gray-500 text-sm mb-4 flex-1">{opt.desc}</p>
                 <a
                   href={opt.action}
                   target={opt.action.startsWith("http") ? "_blank" : undefined}
@@ -114,35 +111,35 @@ export default function SupportPage() {
       </section>
 
       {/* SLA info */}
-      <section className="py-16 bg-[#18181B]">
+      <section className="py-16 bg-gray-50 border-y border-gray-200">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 text-center">
             <div className="flex flex-col items-center gap-3">
-              <Clock className="w-8 h-8 text-cyan-400" />
-              <p className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-space-grotesk)" }}>2h</p>
-              <p className="text-zinc-500 text-sm">Emergency on-site response (Prishtinë)</p>
+              <Clock className="w-8 h-8 text-blue-600" />
+              <p className="text-2xl font-bold text-gray-900" style={{ fontFamily: "var(--font-space-grotesk)" }}>2h</p>
+              <p className="text-gray-500 text-sm">Emergency on-site response (Prishtinë)</p>
             </div>
             <div className="flex flex-col items-center gap-3">
-              <ShieldCheck className="w-8 h-8 text-blue-400" />
-              <p className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-space-grotesk)" }}>2yr</p>
-              <p className="text-zinc-500 text-sm">Hardware warranty on all products</p>
+              <ShieldCheck className="w-8 h-8 text-blue-600" />
+              <p className="text-2xl font-bold text-gray-900" style={{ fontFamily: "var(--font-space-grotesk)" }}>2yr</p>
+              <p className="text-gray-500 text-sm">Hardware warranty on all products</p>
             </div>
             <div className="flex flex-col items-center gap-3">
-              <FileText className="w-8 h-8 text-cyan-400" />
-              <p className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-space-grotesk)" }}>24/7</p>
-              <p className="text-zinc-500 text-sm">Remote monitoring & emergency support</p>
+              <FileText className="w-8 h-8 text-blue-600" />
+              <p className="text-2xl font-bold text-gray-900" style={{ fontFamily: "var(--font-space-grotesk)" }}>24/7</p>
+              <p className="text-gray-500 text-sm">Remote monitoring & emergency support</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="py-16 bg-[#09090B]">
+      <section className="py-16 bg-white">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <SectionLabel>FAQ</SectionLabel>
             <h2
-              className="text-3xl font-bold text-white"
+              className="text-3xl font-bold text-gray-900"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
               Common Questions
@@ -150,9 +147,9 @@ export default function SupportPage() {
           </div>
           <div className="space-y-4">
             {faq.map((item) => (
-              <div key={item.q} className="bg-white/3 border border-white/8 rounded-2xl p-6">
-                <h3 className="text-white font-semibold mb-2 text-sm">{item.q}</h3>
-                <p className="text-zinc-500 text-sm leading-relaxed">{item.a}</p>
+              <div key={item.q} className="bg-gray-50 border border-gray-200 rounded-2xl p-6">
+                <h3 className="text-gray-900 font-semibold mb-2 text-sm">{item.q}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{item.a}</p>
               </div>
             ))}
           </div>
@@ -160,7 +157,7 @@ export default function SupportPage() {
       </section>
 
       {/* Bottom CTA */}
-      <section className="py-16 bg-[#18181B]">
+      <section className="py-16 bg-blue-600">
         <div className="max-w-2xl mx-auto px-4 text-center">
           <h2
             className="text-2xl font-bold text-white mb-4"
@@ -168,12 +165,12 @@ export default function SupportPage() {
           >
             Need a Maintenance Contract?
           </h2>
-          <p className="text-zinc-400 mb-6 text-sm">
+          <p className="text-blue-100 mb-6 text-sm">
             Get priority support, preventive maintenance visits, and guaranteed SLA response times.
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition-all duration-200"
+            className="inline-flex items-center px-6 py-3 rounded-xl bg-white hover:bg-gray-50 text-blue-600 font-semibold text-sm transition-all duration-200"
           >
             Get a Maintenance Quote
           </Link>

@@ -13,26 +13,23 @@ export const metadata: Metadata = {
 
 export default function ServicesPage() {
   return (
-    <div className="bg-[#09090B] min-h-screen">
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-[700px] h-[400px] bg-cyan-500/6 rounded-full blur-[140px]" />
-        </div>
-        <div className="max-w-4xl mx-auto text-center relative">
+    <div className="bg-white min-h-screen">
+      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gray-50 border-b border-gray-200">
+        <div className="max-w-4xl mx-auto text-center">
           <SectionLabel>What We Do</SectionLabel>
           <h1
-            className="text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight"
+            className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 tracking-tight"
             style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "-0.02em" }}
           >
             Complete Security &<br />Technology Solutions
           </h1>
-          <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-500 text-lg max-w-2xl mx-auto">
             From IP cameras to fiber optic backbones — we design, install, and maintain every layer of your security and network infrastructure.
           </p>
         </div>
       </section>
 
-      <section className="pb-24 px-4 sm:px-6 lg:px-8">
+      <section className="pb-24 px-4 sm:px-6 lg:px-8 pt-12">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {services.map((svc) => {
@@ -46,23 +43,23 @@ export default function ServicesPage() {
                     <Icon className="w-6 h-6" style={{ color: svc.color }} />
                   </div>
                   <h2
-                    className="text-white font-bold text-xl mb-3"
+                    className="text-gray-900 font-bold text-xl mb-3"
                     style={{ fontFamily: "var(--font-space-grotesk)" }}
                   >
                     {svc.title}
                   </h2>
-                  <p className="text-zinc-400 text-sm mb-5 leading-relaxed">{svc.shortDesc}</p>
+                  <p className="text-gray-500 text-sm mb-5 leading-relaxed">{svc.shortDesc}</p>
                   <ul className="space-y-2 mb-6 flex-1">
                     {svc.features.map((f) => (
                       <li key={f} className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-cyan-400 mt-0.5 shrink-0" />
-                        <span className="text-zinc-400 text-sm">{f}</span>
+                        <CheckCircle className="w-4 h-4 text-blue-500 mt-0.5 shrink-0" />
+                        <span className="text-gray-600 text-sm">{f}</span>
                       </li>
                     ))}
                   </ul>
                   <Link
                     href={`/services/${svc.slug}`}
-                    className="inline-flex items-center gap-1 text-blue-400 hover:text-blue-300 font-medium text-sm transition-colors mt-auto"
+                    className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-700 font-medium text-sm transition-colors mt-auto"
                   >
                     Learn More →
                   </Link>

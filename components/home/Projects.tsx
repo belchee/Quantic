@@ -39,12 +39,12 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section className="py-24 lg:py-32 bg-[#18181B]">
+    <section className="py-24 lg:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <SectionLabel>Our Work</SectionLabel>
           <h2
-            className="text-4xl lg:text-5xl font-bold text-white tracking-tight"
+            className="text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight"
             style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "-0.02em" }}
           >
             Recent Installations
@@ -59,7 +59,7 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="group bg-white/5 border border-white/8 rounded-2xl overflow-hidden hover:border-blue-500/30 hover:scale-[1.02] transition-all duration-300"
+              className="group bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-blue-300 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
             >
               {/* Image */}
               <div className="relative h-48 overflow-hidden">
@@ -67,22 +67,21 @@ export default function Projects() {
                 <img
                   src={p.image}
                   alt={p.title}
-                  className="w-full h-full object-cover opacity-70 group-hover:opacity-90 group-hover:scale-105 transition-all duration-500"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#09090B] to-transparent" />
-                <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-mono font-semibold bg-blue-600/80 text-white border border-blue-500/50 backdrop-blur-sm">
+                <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-600 text-white">
                   {p.category}
                 </span>
               </div>
 
               <div className="p-5">
                 <h3
-                  className="text-white font-semibold mb-2"
+                  className="text-gray-900 font-semibold mb-2"
                   style={{ fontFamily: "var(--font-space-grotesk)" }}
                 >
                   {p.title}
                 </h3>
-                <p className="text-zinc-500 text-sm leading-relaxed">{p.desc}</p>
+                <p className="text-gray-500 text-sm leading-relaxed">{p.desc}</p>
               </div>
             </motion.div>
           ))}
@@ -91,7 +90,7 @@ export default function Projects() {
         <div className="text-center mt-10">
           <Link
             href="/projects"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/10 text-zinc-300 hover:text-white hover:border-white/20 text-sm font-medium transition-all"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-gray-200 text-gray-700 hover:text-blue-600 hover:border-blue-300 text-sm font-medium transition-all bg-white"
           >
             View All Projects →
           </Link>

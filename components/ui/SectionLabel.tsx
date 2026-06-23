@@ -8,11 +8,11 @@ interface SectionLabelProps {
 export default function SectionLabel({ children, className }: SectionLabelProps) {
   return (
     <div className={cn("flex items-center justify-center gap-3 mb-4", className)}>
-      <span className="w-8 h-px bg-cyan-400/60" />
-      <span className="text-cyan-400 text-xs font-mono uppercase tracking-[0.2em] font-medium">
+      <span className="w-8 h-px bg-blue-600/40" />
+      <span className="text-blue-600 text-xs font-semibold uppercase tracking-[0.15em]">
         {children}
       </span>
-      <span className="w-8 h-px bg-cyan-400/60" />
+      <span className="w-8 h-px bg-blue-600/40" />
     </div>
   );
 }
