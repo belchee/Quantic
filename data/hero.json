@@ -1,0 +1,17 @@
+{
+  "headline": "ZBULO OFERTAT MË TË MIRA\nPËR SISTEME SIGURIE",
+  "ctaText": "BLEJ TANI",
+  "ctaLink": "/products",
+  "trustBadges": [
+    { "icon": "🚚", "title": "Transport falas", "sub": "Brenda gjithë Kosovës" },
+    { "icon": "💳", "title": "Pagesa të sigurta me kartelë", "sub": "Me të gjitha bankat" },
+    { "icon": "🛡️", "title": "Garacion", "sub": "Garacion direkt nga prodhuesi në të gjitha produktet" }
+  ],
+  "brandLogos": [
+    { "name": "HIKVISION", "color": "#d40000" },
+    { "name": "DAHUA", "color": "#1a7fd4" },
+    { "name": "Tiandy", "color": "#00aa44" },
+    { "name": "TVT", "color": "#3b82f6" },
+    { "name": "EZVIZ", "color": "#a855f7" }
+  ]
+}

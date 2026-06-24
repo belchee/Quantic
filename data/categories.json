@@ -1,0 +1,9 @@
+[
+  { "value": "bullet-cameras", "label": "Bullet Cameras" },
+  { "value": "dome-cameras", "label": "Dome Cameras" },
+  { "value": "ptz-cameras", "label": "PTZ Cameras" },
+  { "value": "nvr", "label": "NVR Recorders" },
+  { "value": "poe-switches", "label": "PoE Switches" },
+  { "value": "wifi-cameras", "label": "WiFi Cameras" },
+  { "value": "accessories", "label": "Accessories" }
+]

@@ -1,10 +1,18 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import SectionLabel from "@/components/ui/SectionLabel";
-import { brands } from "@/lib/brands";
+
+interface Brand { name: string; tagline: string; active: boolean }
 
 export default function Brands() {
+  const [brands, setBrands] = useState<Brand[]>([]);
+
+  useEffect(() => {
+    fetch("/api/brands").then((r) => r.json()).then(setBrands);
+  }, []);
+
   return (
     <section className="py-20 bg-gray-50 border-y border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -32,11 +40,7 @@ export default function Brands() {
                   : "border-gray-100 bg-white opacity-40"
               }`}
             >
-              <span
-                className={`font-bold tracking-[0.1em] text-lg ${
-                  brand.active ? "text-gray-800" : "text-gray-400"
-                }`}
-              >
+              <span className={`font-bold tracking-[0.1em] text-lg ${brand.active ? "text-gray-800" : "text-gray-400"}`}>
                 {brand.name}
               </span>
               <span className="text-xs text-gray-500">{brand.tagline}</span>
