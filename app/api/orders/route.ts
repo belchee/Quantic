@@ -114,7 +114,7 @@ export async function POST(req: NextRequest) {
   // Send email notification
   try {
     await getResend().emails.send({
-      from: "Quantic Web <orders@quantic-ks.net>",
+      from: "Quantic Web <onboarding@resend.dev>",
       to: process.env.ORDER_NOTIFY_EMAIL!,
       subject: `Porosi e re nga ${name} — ${total.toFixed(2)} €`,
       html: emailHtml,
