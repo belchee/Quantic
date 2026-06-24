@@ -4,17 +4,20 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Search, Menu, X, Phone, ChevronDown } from "lucide-react";
+import {
+  Search, Menu, X, ShoppingCart, User, ChevronDown,
+  Zap, Monitor, Laptop, Tv, Package, Camera, Network, Wrench,
+} from "lucide-react";
 
 const categoryLinks = [
-  { href: "/services/video-surveillance", label: "CCTV & Surveillance" },
-  { href: "/services/alarm-systems", label: "Alarm Systems" },
-  { href: "/services/fiber-optic", label: "Fiber Optic" },
-  { href: "/services/network-infrastructure", label: "Rrjeta" },
-  { href: "/products", label: "Products" },
-  { href: "/services", label: "Shërbime" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  { href: "/services/video-surveillance", label: "Kamera dhe Sisteme Sigurie", icon: Camera },
+  { href: "/services/alarm-systems", label: "Alarm Systems", icon: Package },
+  { href: "/services/fiber-optic", label: "Fiber Optik", icon: Zap },
+  { href: "/services/network-infrastructure", label: "Rrjeta", icon: Network },
+  { href: "/products", label: "Produktet", icon: Monitor },
+  { href: "/services", label: "Shërbime të IT", icon: Wrench },
+  { href: "/about", label: "About", icon: User },
+  { href: "/contact", label: "Kontakt", icon: Package },
 ];
 
 export default function Navbar() {
@@ -26,50 +29,45 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Top bar */}
+      {/* ── Top bar ── */}
       <header className="fixed top-0 inset-x-0 z-50 bg-white border-b border-gray-200 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-4 h-[68px]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-5 h-[68px]">
+
           {/* Logo */}
-          <Link href="/" className="flex-shrink-0 flex items-center gap-2">
+          <Link href="/" className="flex-shrink-0 flex items-center gap-2 mr-2">
             <div className="bg-[#2563EB] px-3 py-1.5 rounded-lg">
               <Image src="/quantic-logo.svg" height={28} width={110} alt="Quantic" priority />
             </div>
           </Link>
 
-          {/* Search bar */}
-          <div className="flex-1 hidden sm:flex items-center border border-gray-300 rounded-full overflow-hidden max-w-2xl mx-auto">
+          {/* Search bar (prominent, pill) */}
+          <div className="flex-1 hidden sm:flex items-center border border-gray-300 rounded-full overflow-hidden bg-white max-w-2xl">
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Kërko produktet..."
-              className="flex-1 px-5 py-2.5 text-sm text-gray-800 outline-none bg-white placeholder-gray-400"
+              placeholder="Kërko produkte"
+              className="flex-1 px-5 py-2.5 text-sm text-gray-800 outline-none bg-transparent placeholder-gray-400"
             />
-            <button className="px-4 py-2.5 bg-white text-gray-500 hover:text-blue-600 transition-colors border-l border-gray-200">
+            <button className="px-4 py-2.5 border-l border-gray-200 text-gray-500 hover:text-blue-600 transition-colors">
               <Search className="w-4 h-4" />
             </button>
           </div>
 
-          {/* Right: phone + contact */}
-          <div className="hidden lg:flex items-center gap-5 flex-shrink-0">
-            <a
-              href="tel:+38345460460"
-              className="flex items-center gap-2 text-sm text-gray-700 hover:text-blue-600 transition-colors font-medium"
-            >
-              <Phone className="w-4 h-4 text-blue-600" />
-              +383 45 460 460
-            </a>
-            <Link
-              href="/contact"
-              className="px-4 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
-            >
-              Get a Quote
+          {/* Right: cart + account */}
+          <div className="hidden sm:flex items-center gap-5 flex-shrink-0 ml-2">
+            <Link href="/products" className="text-gray-600 hover:text-blue-600 transition-colors" aria-label="Cart">
+              <ShoppingCart className="w-5 h-5" />
+            </Link>
+            <Link href="/contact" className="flex items-center gap-1.5 text-sm font-semibold text-gray-700 hover:text-blue-600 transition-colors">
+              <User className="w-5 h-5" />
+              KYQU
             </Link>
           </div>
 
           {/* Mobile hamburger */}
           <button
-            className="lg:hidden ml-auto p-2 text-gray-600 hover:text-gray-900"
+            className="sm:hidden ml-auto p-2 text-gray-600"
             onClick={() => setOpen(!open)}
             aria-label="Menu"
           >
@@ -77,27 +75,31 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Category nav bar */}
+        {/* ── Category nav bar ── */}
         <nav className="hidden lg:block bg-[#1a1f2e] border-t border-[#2a3040]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-1 h-11">
-            {categoryLinks.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                className={`flex items-center gap-1 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide transition-colors whitespace-nowrap ${
-                  pathname === l.href || pathname.startsWith(l.href + "/")
-                    ? "text-blue-400"
-                    : "text-gray-300 hover:text-white"
-                }`}
-              >
-                {l.label}
-              </Link>
-            ))}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center h-11 gap-0.5">
+            {categoryLinks.map((l) => {
+              const Icon = l.icon;
+              const active = pathname === l.href || pathname.startsWith(l.href + "/");
+              return (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide whitespace-nowrap transition-colors group ${
+                    active ? "text-blue-400" : "text-gray-300 hover:text-white"
+                  }`}
+                >
+                  <Icon className="w-3.5 h-3.5 opacity-70" />
+                  {l.label}
+                  <ChevronDown className="w-3 h-3 opacity-50 group-hover:opacity-100" />
+                </Link>
+              );
+            })}
           </div>
         </nav>
       </header>
 
-      {/* Mobile dropdown */}
+      {/* ── Mobile dropdown ── */}
       <div
         className={`fixed inset-x-0 top-[68px] z-40 bg-white border-b border-gray-200 shadow-lg transition-all duration-200 lg:hidden ${
           open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
@@ -108,7 +110,7 @@ export default function Navbar() {
           <div className="flex items-center border border-gray-300 rounded-full overflow-hidden">
             <input
               type="text"
-              placeholder="Kërko produktet..."
+              placeholder="Kërko produkte"
               className="flex-1 px-4 py-2.5 text-sm outline-none"
             />
             <button className="px-4 py-2.5 border-l border-gray-200 text-gray-500">
@@ -117,22 +119,22 @@ export default function Navbar() {
           </div>
         </div>
         <nav className="px-4 py-3 flex flex-col gap-1">
-          {categoryLinks.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                pathname === l.href ? "text-blue-600 bg-blue-50" : "text-gray-700 hover:bg-gray-50"
-              }`}
-              onClick={() => setOpen(false)}
-            >
-              {l.label}
-            </Link>
-          ))}
-          <a href="tel:+38345460460" className="mt-2 flex items-center gap-2 px-4 py-3 text-sm text-gray-700">
-            <Phone className="w-4 h-4 text-blue-600" />
-            +383 45 460 460
-          </a>
+          {categoryLinks.map((l) => {
+            const Icon = l.icon;
+            return (
+              <Link
+                key={l.href}
+                href={l.href}
+                className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                  pathname === l.href ? "text-blue-600 bg-blue-50" : "text-gray-700 hover:bg-gray-50"
+                }`}
+                onClick={() => setOpen(false)}
+              >
+                <Icon className="w-4 h-4 text-gray-400" />
+                {l.label}
+              </Link>
+            );
+          })}
         </nav>
       </div>
     </>
