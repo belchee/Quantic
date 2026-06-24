@@ -242,7 +242,9 @@ export default function ProductPageClient({ slug }: { slug: string }) {
           {/* Description tab */}
           {tab === "desc" && product.shortDesc && (
             <div className="border border-gray-200 border-t-0 rounded-b-2xl p-6 text-sm text-gray-600 leading-relaxed">
-              {product.shortDesc}
+              {product.shortDesc.split("\n").map((line, i) => (
+                line.trim() ? <p key={i} className="mb-2">{line}</p> : <br key={i} />
+              ))}
             </div>
           )}
         </div>

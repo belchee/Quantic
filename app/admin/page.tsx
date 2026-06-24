@@ -29,7 +29,7 @@ const EMPTY_PRODUCT: Partial<Product> = {
 };
 
 /* ─── Auth helpers ─── */
-const TOKEN_KEY = "qs-admin-token";
+const TOKEN_KEY = "qs-admin-token-v2";
 function getToken() { return typeof window !== "undefined" ? localStorage.getItem(TOKEN_KEY) : null; }
 function setToken(t: string) { localStorage.setItem(TOKEN_KEY, t); }
 function clearToken() { localStorage.removeItem(TOKEN_KEY); }
@@ -1103,7 +1103,14 @@ export default function AdminPage() {
   const [authed, setAuthed] = useState<boolean | null>(null);
 
   useEffect(() => {
-    setAuthed(getToken() === "qs-admin-token");
+    const token = getToken();
+    if (!token) { setAuthed(false); return; }
+    // Validate token server-side
+    fetch("/api/auth", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "verify", token }),
+    }).then(r => r.json()).then(d => setAuthed(!!d.ok)).catch(() => setAuthed(false));
   }, []);
 
   if (authed === null) return null;
