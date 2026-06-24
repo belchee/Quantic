@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, Shield, Wifi, Camera } from "lucide-react";
 import { useLang } from "@/lib/i18n";
@@ -80,13 +81,15 @@ export default function Hero() {
 
             {/* Content */}
             <div className="relative z-10 flex flex-col items-center justify-center h-full py-16 px-8 text-center">
-              <p className="text-white/40 text-xs font-semibold uppercase tracking-[0.2em] mb-4">Quantic SHPK</p>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 tracking-tight"
-                style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "-0.025em" }}>
-                Tiandy · Dahua · TVT
-              </h2>
+              <p className="text-white/40 text-xs font-semibold uppercase tracking-[0.2em] mb-8">Quantic SHPK</p>
+              <div className="flex flex-wrap items-center justify-center gap-8 mb-8">
+                <Image src="/brand-tvt.svg" alt="TVT" width={120} height={35} className="h-8 w-auto object-contain" />
+                <Image src="/brand-dahua.svg" alt="Dahua" width={120} height={35} className="h-8 w-auto object-contain" />
+                <Image src="/brand-tiandy.svg" alt="Tiandy" width={120} height={35} className="h-8 w-auto object-contain" />
+                <Image src="/brand-fourth.svg" alt="Brand" width={50} height={50} className="h-8 w-auto object-contain" />
+              </div>
               <p className="text-white/50 text-sm max-w-lg leading-relaxed">
-                {tr("products_sub")}
+                {tr("hero_partner_seller")}
               </p>
               <Link href="/products"
                 className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-gray-100 text-gray-900 font-semibold text-sm rounded-xl transition-colors">
