@@ -1,16 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 320" width="500" height="320">
-  <!-- Swoosh ellipse -->
-  <ellipse cx="230" cy="175" rx="215" ry="155" fill="none" stroke="#1a6fb5" stroke-width="14" stroke-dasharray="1200 1" stroke-dashoffset="-80" pathLength="1300"/>
-  <!-- t letter left -->
-  <rect x="30" y="60" width="48" height="175" rx="4" fill="#1a6fb5"/>
-  <rect x="10" y="60" width="88" height="48" rx="4" fill="#1a6fb5"/>
-  <!-- v letter center -->
-  <polygon points="168,60 215,235 262,60 300,60 240,270 190,270 130,60" fill="#1a6fb5"/>
-  <!-- t letter right -->
-  <rect x="312" y="60" width="48" height="175" rx="4" fill="#1a6fb5"/>
-  <rect x="292" y="60" width="88" height="48" rx="4" fill="#1a6fb5"/>
-  <!-- NDAA text -->
-  <text x="355" y="52" font-family="Arial, sans-serif" font-weight="700" font-size="42" fill="#1a6fb5">NDAA</text>
-  <!-- swoosh bottom arc -->
-  <path d="M 18 240 Q 80 320 230 315 Q 360 310 430 230" fill="none" stroke="#1a6fb5" stroke-width="14" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <!-- outer swoosh ellipse top -->
+  <path d="M 60 55 Q 200 -20 340 55" fill="none" stroke="#1565C0" stroke-width="22" stroke-linecap="round"/>
+  <!-- outer swoosh ellipse bottom -->
+  <path d="M 60 245 Q 200 320 340 245" fill="none" stroke="#1565C0" stroke-width="22" stroke-linecap="round"/>
+  <!-- t left -->
+  <rect x="42" y="80" width="46" height="140" rx="4" fill="#1565C0"/>
+  <rect x="22" y="80" width="86" height="44" rx="4" fill="#1565C0"/>
+  <!-- v center -->
+  <polygon points="148,80 196,220 244,80 274,80 210,260 182,260 118,80" fill="#1565C0"/>
+  <!-- t right -->
+  <rect x="312" y="80" width="46" height="140" rx="4" fill="#1565C0"/>
+  <rect x="292" y="80" width="86" height="44" rx="4" fill="#1565C0"/>
 </svg>

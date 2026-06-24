@@ -76,10 +76,11 @@ export default function Hero() {
             <p className="text-xs font-semibold text-gray-400 uppercase tracking-[0.2em] mb-2">Quantic SHPK</p>
             <p className="text-gray-500 text-sm">{tr("hero_partner_seller")}</p>
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-12 lg:gap-16">
-            <Image src="/brand-tiandy.svg" alt="Tiandy" width={200} height={60} className="h-10 w-auto max-w-[160px] object-contain" />
-            <Image src="/brand-tvt.svg" alt="TVT" width={200} height={60} className="h-10 w-auto max-w-[120px] object-contain" />
-            <Image src="/brand-fourth.svg" alt="Brand" width={120} height={60} className="h-10 w-auto max-w-[100px] object-contain" />
+          <div className="flex flex-wrap items-center justify-center gap-10 lg:gap-14">
+            <Image src="/brand-tiandy.svg" alt="Tiandy" width={200} height={60} className="h-14 w-auto max-w-[180px] object-contain" />
+            <Image src="/brand-tvt.svg" alt="TVT" width={200} height={60} className="h-14 w-auto max-w-[140px] object-contain" />
+            <Image src="/brand-artmotion.svg" alt="ART MOTION" width={200} height={60} className="h-14 w-auto max-w-[160px] object-contain" />
+            <Image src="/brand-fourth.svg" alt="Kujtesa" width={120} height={60} className="h-14 w-auto max-w-[110px] object-contain" />
           </div>
           <div className="text-center mt-10">
             <Link href="/products"
