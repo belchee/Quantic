@@ -38,7 +38,7 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-5 lg:px-8 flex items-center h-[64px] gap-8">
 
           <Link href="/" className="flex-shrink-0">
-            <Image src="/quantic-logo-light.svg" height={36} width={120} alt="Quantic" priority />
+            <Image src="/quantic-logo-black.svg" height={36} width={120} alt="Quantic" priority unoptimized />
           </Link>
 
           <nav className="hidden md:flex items-center gap-1 flex-1">
