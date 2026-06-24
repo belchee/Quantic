@@ -5,7 +5,7 @@ import Image from "next/image";
 import {
   Plus, Pencil, Trash2, X, Upload, Save, Package,
   LogOut, Lock, LayoutDashboard, Tag, Star, Image as ImageIcon,
-  ChevronDown, ChevronUp, Eye, EyeOff, AlertCircle,
+  ChevronDown, ChevronUp, Eye, EyeOff, AlertCircle, ShoppingCart, CheckCircle, Clock, XCircle,
 } from "lucide-react";
 
 /* ─── Types ─── */
@@ -776,7 +776,177 @@ function HeroTab() {
 }
 
 /* ══════════════════ MAIN DASHBOARD ══════════════════ */
+/* ══════════════════ ORDERS TAB ══════════════════ */
+interface Order {
+  id: string; name: string; email: string; phone: string;
+  city: string; address: string; note?: string;
+  items: { id: string; name: string; price: number; quantity: number }[];
+  total: number; status: string; created_at: string;
+}
+
+function OrdersTab() {
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [selected, setSelected] = useState<Order | null>(null);
+
+  async function load() {
+    const r = await fetch("/api/orders");
+    setOrders(await r.json());
+    setLoading(false);
+  }
+  useEffect(() => { load(); }, []);
+
+  async function updateStatus(id: string, status: string) {
+    await fetch("/api/orders", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, status }),
+    });
+    await load();
+  }
+
+  const statusConfig: Record<string, { label: string; color: string; icon: React.ElementType }> = {
+    pending: { label: "Në pritje", color: "bg-amber-50 text-amber-700 border-amber-200", icon: Clock },
+    confirmed: { label: "Konfirmuar", color: "bg-green-50 text-green-700 border-green-200", icon: CheckCircle },
+    cancelled: { label: "Anuluar", color: "bg-red-50 text-red-600 border-red-200", icon: XCircle },
+  };
+
+  if (loading) return <div className="py-20 text-center text-gray-400">Duke ngarkuar porositë...</div>;
+
+  return (
+    <>
+      <div className="flex items-center justify-between mb-6">
+        <p className="text-sm text-gray-500">{orders.length} porosi gjithsej</p>
+        <button onClick={load} className="text-sm text-blue-600 hover:text-blue-700 font-medium">Rifresko</button>
+      </div>
+
+      {orders.length === 0 ? (
+        <div className="bg-white rounded-2xl border border-gray-200 py-16 text-center text-gray-400">
+          <ShoppingCart className="w-10 h-10 mx-auto mb-3 opacity-30" />
+          <p>Nuk ka porosi ende.</p>
+        </div>
+      ) : (
+        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+          <table className="w-full text-sm">
+            <thead className="bg-gray-50 border-b border-gray-200">
+              <tr>
+                <th className="text-left px-5 py-3 text-gray-600 font-semibold">Klienti</th>
+                <th className="text-left px-5 py-3 text-gray-600 font-semibold hidden md:table-cell">Telefoni</th>
+                <th className="text-left px-5 py-3 text-gray-600 font-semibold hidden lg:table-cell">Qyteti</th>
+                <th className="text-left px-5 py-3 text-gray-600 font-semibold">Totali</th>
+                <th className="text-left px-5 py-3 text-gray-600 font-semibold">Statusi</th>
+                <th className="text-left px-5 py-3 text-gray-600 font-semibold hidden md:table-cell">Data</th>
+                <th className="text-right px-5 py-3 text-gray-600 font-semibold">Detaje</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-100">
+              {orders.map((o) => {
+                const s = statusConfig[o.status] ?? statusConfig.pending;
+                const SIcon = s.icon;
+                return (
+                  <tr key={o.id} className="hover:bg-gray-50 transition-colors">
+                    <td className="px-5 py-3.5">
+                      <p className="font-semibold text-gray-900">{o.name}</p>
+                      <p className="text-xs text-gray-400">{o.email}</p>
+                    </td>
+                    <td className="px-5 py-3.5 hidden md:table-cell">
+                      <a href={`tel:${o.phone}`} className="text-blue-600 hover:text-blue-700 font-medium">{o.phone}</a>
+                    </td>
+                    <td className="px-5 py-3.5 text-gray-600 hidden lg:table-cell">{o.city}</td>
+                    <td className="px-5 py-3.5 font-bold text-gray-900">{o.total.toFixed(2)} €</td>
+                    <td className="px-5 py-3.5">
+                      <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-xs font-semibold ${s.color}`}>
+                        <SIcon className="w-3 h-3" />
+                        {s.label}
+                      </div>
+                    </td>
+                    <td className="px-5 py-3.5 text-gray-400 text-xs hidden md:table-cell">
+                      {new Date(o.created_at).toLocaleDateString("sq-AL")}
+                    </td>
+                    <td className="px-5 py-3.5">
+                      <div className="flex items-center justify-end gap-1">
+                        <button onClick={() => setSelected(o)}
+                          className="px-3 py-1.5 text-xs font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors">
+                          Shiko
+                        </button>
+                        {o.status === "pending" && (
+                          <>
+                            <button onClick={() => updateStatus(o.id, "confirmed")}
+                              className="px-3 py-1.5 text-xs font-medium text-green-700 hover:bg-green-50 rounded-lg transition-colors">
+                              Konfirmo
+                            </button>
+                            <button onClick={() => updateStatus(o.id, "cancelled")}
+                              className="px-3 py-1.5 text-xs font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                              Anulo
+                            </button>
+                          </>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {/* Order detail modal */}
+      {selected && (
+        <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/50 p-4 overflow-y-auto">
+          <div className="bg-white rounded-2xl w-full max-w-lg my-8 shadow-2xl">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+              <h2 className="font-bold text-gray-900">Detajet e porosisë</h2>
+              <button onClick={() => setSelected(null)}><X className="w-5 h-5 text-gray-500" /></button>
+            </div>
+            <div className="p-6 space-y-5">
+              <div className="bg-gray-50 rounded-xl p-4 space-y-2 text-sm">
+                <div className="flex justify-between"><span className="text-gray-500">Emri</span><span className="font-semibold">{selected.name}</span></div>
+                <div className="flex justify-between"><span className="text-gray-500">Telefoni</span>
+                  <a href={`tel:${selected.phone}`} className="font-semibold text-blue-600">{selected.phone}</a>
+                </div>
+                <div className="flex justify-between"><span className="text-gray-500">Email</span><span className="font-medium">{selected.email}</span></div>
+                <div className="flex justify-between"><span className="text-gray-500">Adresa</span><span className="font-medium text-right max-w-xs">{selected.city}, {selected.address}</span></div>
+                {selected.note && <div className="flex justify-between"><span className="text-gray-500">Shënim</span><span className="font-medium text-right max-w-xs">{selected.note}</span></div>}
+              </div>
+              <div>
+                <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">Produktet</p>
+                <ul className="space-y-2">
+                  {selected.items.map((item, i) => (
+                    <li key={i} className="flex items-center justify-between text-sm py-2 border-b border-gray-100 last:border-0">
+                      <span className="text-gray-700 flex-1 mr-4">{item.name}</span>
+                      <span className="text-gray-500 text-xs">×{item.quantity}</span>
+                      <span className="font-bold text-gray-900 ml-4">{(item.price * item.quantity).toFixed(2)} €</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="flex items-center justify-between pt-2 border-t border-gray-200">
+                <span className="font-bold text-gray-900">Totali</span>
+                <span className="text-2xl font-bold text-gray-900">{selected.total.toFixed(2)} €</span>
+              </div>
+              {selected.status === "pending" && (
+                <div className="flex gap-3 pt-2">
+                  <button onClick={() => { updateStatus(selected.id, "confirmed"); setSelected(null); }}
+                    className="flex-1 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-xl text-sm font-semibold transition-colors">
+                    Konfirmo porosinë
+                  </button>
+                  <button onClick={() => { updateStatus(selected.id, "cancelled"); setSelected(null); }}
+                    className="flex-1 py-2.5 bg-red-50 hover:bg-red-100 text-red-600 rounded-xl text-sm font-semibold transition-colors border border-red-200">
+                    Anulo
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
 const TABS = [
+  { id: "orders", label: "Porositë", icon: ShoppingCart },
   { id: "products", label: "Produktet", icon: Package },
   { id: "categories", label: "Kategoritë", icon: Tag },
   { id: "brands", label: "Brandet", icon: Star },
@@ -784,7 +954,7 @@ const TABS = [
 ];
 
 function Dashboard({ onLogout }: { onLogout: () => void }) {
-  const [tab, setTab] = useState("products");
+  const [tab, setTab] = useState("orders");
   const [categories, setCategories] = useState<Category[]>([]);
   const [showChangePw, setShowChangePw] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
@@ -871,6 +1041,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
           <h1 className="text-2xl font-bold text-gray-900 mb-6">
             {TABS.find((t) => t.id === tab)?.label}
           </h1>
+          {tab === "orders" && <OrdersTab />}
           {tab === "products" && <ProductsTab categories={categories} />}
           {tab === "categories" && <CategoriesTab categories={categories} onReload={loadCategories} />}
           {tab === "brands" && <BrandsTab />}
