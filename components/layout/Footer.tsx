@@ -30,7 +30,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-6">
-              <Image src="/quantic-logo-light.svg" height={36} width={120} alt="Quantic" />
+              <Image src="/quantic-logo-light.svg" height={40} width={140} alt="Quantic" unoptimized style={{ filter: "brightness(0) invert(1)" }} />
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
               {tr("footer_tagline")}
