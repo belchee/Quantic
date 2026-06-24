@@ -24,15 +24,15 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-gray-950 text-white">
+    <footer className="bg-white text-gray-900 border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-5 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-6">
-              <Image src="/quantic-logo-light.svg" height={40} width={140} alt="Quantic" unoptimized style={{ filter: "brightness(0) invert(1)" }} />
+              <Image src="/quantic-logo-light.svg" height={40} width={140} alt="Quantic" unoptimized style={{ filter: "brightness(0)" }} />
             </Link>
-            <p className="text-gray-400 text-sm leading-relaxed mb-6">
+            <p className="text-gray-500 text-sm leading-relaxed mb-6">
               {tr("footer_tagline")}
             </p>
             <a href="https://wa.me/38345460460" target="_blank" rel="noopener noreferrer"
@@ -47,11 +47,11 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h3 className="text-white font-semibold text-xs mb-5 uppercase tracking-widest">{tr("footer_company")}</h3>
+            <h3 className="text-gray-900 font-semibold text-xs mb-5 uppercase tracking-widest">{tr("footer_company")}</h3>
             <ul className="space-y-3">
               {navLinks.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-gray-400 text-sm hover:text-white transition-colors">{tr(l.key)}</Link>
+                  <Link href={l.href} className="text-gray-500 text-sm hover:text-gray-900 transition-colors">{tr(l.key)}</Link>
                 </li>
               ))}
             </ul>
@@ -59,11 +59,11 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h3 className="text-white font-semibold text-xs mb-5 uppercase tracking-widest">{tr("footer_services")}</h3>
+            <h3 className="text-gray-900 font-semibold text-xs mb-5 uppercase tracking-widest">{tr("footer_services")}</h3>
             <ul className="space-y-3">
               {serviceLinks.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-gray-400 text-sm hover:text-white transition-colors">{tr(l.key)}</Link>
+                  <Link href={l.href} className="text-gray-500 text-sm hover:text-gray-900 transition-colors">{tr(l.key)}</Link>
                 </li>
               ))}
             </ul>
@@ -71,31 +71,31 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="text-white font-semibold text-xs mb-5 uppercase tracking-widest">{tr("footer_contact")}</h3>
+            <h3 className="text-gray-900 font-semibold text-xs mb-5 uppercase tracking-widest">{tr("footer_contact")}</h3>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
-                <Phone className="w-4 h-4 text-gray-500 mt-0.5 shrink-0" />
-                <a href="tel:+38345460460" className="text-gray-400 text-sm hover:text-white transition-colors">+383 45 460 460</a>
+                <Phone className="w-4 h-4 text-gray-400 mt-0.5 shrink-0" />
+                <a href="tel:+38345460460" className="text-gray-500 text-sm hover:text-gray-900 transition-colors">+383 45 460 460</a>
               </li>
               <li className="flex items-start gap-3">
-                <Mail className="w-4 h-4 text-gray-500 mt-0.5 shrink-0" />
-                <a href="mailto:quanticshpk@gmail.com" className="text-gray-400 text-sm hover:text-white transition-colors break-all">quanticshpk@gmail.com</a>
+                <Mail className="w-4 h-4 text-gray-400 mt-0.5 shrink-0" />
+                <a href="mailto:quanticshpk@gmail.com" className="text-gray-500 text-sm hover:text-gray-900 transition-colors break-all">quanticshpk@gmail.com</a>
               </li>
               <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-gray-500 mt-0.5 shrink-0" />
-                <span className="text-gray-400 text-sm">Prishtinë, Kosovo</span>
+                <MapPin className="w-4 h-4 text-gray-400 mt-0.5 shrink-0" />
+                <span className="text-gray-500 text-sm">Prishtinë, Kosovo</span>
               </li>
               <li className="flex items-start gap-3">
-                <Clock className="w-4 h-4 text-gray-500 mt-0.5 shrink-0" />
-                <span className="text-gray-400 text-sm">{tr("footer_hours")}</span>
+                <Clock className="w-4 h-4 text-gray-400 mt-0.5 shrink-0" />
+                <span className="text-gray-500 text-sm">{tr("footer_hours")}</span>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-14 pt-8 border-t border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-gray-500 text-xs">© {new Date().getFullYear()} Quantic SHPK. {tr("footer_rights")}</p>
-          <p className="text-gray-600 text-xs">{tr("footer_tagline")}</p>
+        <div className="mt-14 pt-8 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-gray-400 text-xs">© {new Date().getFullYear()} Quantic SHPK. {tr("footer_rights")}</p>
+          <p className="text-gray-400 text-xs">{tr("footer_tagline")}</p>
         </div>
       </div>
     </footer>

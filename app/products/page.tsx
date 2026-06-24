@@ -3,7 +3,7 @@
 import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { SlidersHorizontal, X, ChevronDown } from "lucide-react";
+import { SlidersHorizontal, X, ChevronDown, Search } from "lucide-react";
 import { useLang } from "@/lib/i18n";
 
 interface Product {
@@ -22,6 +22,7 @@ export default function ProductsPage() {
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 9999]);
   const [sort, setSort] = useState("default");
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [search, setSearch] = useState("");
   const { tr } = useLang();
 
   useEffect(() => {
@@ -45,12 +46,13 @@ export default function ProductsPage() {
 
   const filtered = useMemo(() => {
     let r = [...products];
+    if (search.trim()) r = r.filter((p) => p.name.toLowerCase().includes(search.toLowerCase()) || p.model.toLowerCase().includes(search.toLowerCase()));
     if (selectedCategories.length) r = r.filter((p) => selectedCategories.includes(p.category));
     r = r.filter((p) => p.price >= priceRange[0] && p.price <= priceRange[1]);
     if (sort === "price-asc") r.sort((a, b) => a.price - b.price);
     if (sort === "price-desc") r.sort((a, b) => b.price - a.price);
     return r;
-  }, [products, selectedCategories, priceRange, sort]);
+  }, [products, selectedCategories, priceRange, sort, search]);
 
   function Sidebar() {
     return (
@@ -107,7 +109,22 @@ export default function ProductsPage() {
             style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "-0.025em" }}>
             {tr("products_h2")}
           </h1>
-          <p className="text-gray-500 mt-2 text-base">{tr("products_sub")}</p>
+          <p className="text-gray-500 mt-2 text-base mb-6">{tr("products_sub")}</p>
+          <div className="relative max-w-md">
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Kërko produkte..."
+              className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl text-sm bg-white focus:outline-none focus:border-gray-400 text-gray-900 placeholder-gray-400"
+            />
+            {search && (
+              <button onClick={() => setSearch("")} className="absolute right-3 top-1/2 -translate-y-1/2">
+                <X className="w-4 h-4 text-gray-400 hover:text-gray-700" />
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
