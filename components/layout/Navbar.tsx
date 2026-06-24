@@ -1,34 +1,51 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, Phone, ShoppingBag } from "lucide-react";
+import { Menu, X, Phone, ShoppingBag, ChevronDown } from "lucide-react";
 import { useLang } from "@/lib/i18n";
 import { useCart } from "@/lib/cart";
 
-const NAV_KEYS = [
-  { href: "/products", key: "nav_products" as const },
-  { href: "/services", key: "nav_services" as const },
-  { href: "/about", key: "nav_about" as const },
-  { href: "/contact", key: "nav_contact" as const },
+const CATEGORIES = [
+  { value: "bullet-cameras", label: { sq: "Kamera Bullet", en: "Bullet Cameras" } },
+  { value: "dome-cameras", label: { sq: "Kamera Dome", en: "Dome Cameras" } },
+  { value: "ptz-cameras", label: { sq: "Kamera PTZ", en: "PTZ Cameras" } },
+  { value: "nvr", label: { sq: "Regjistrues NVR", en: "NVR Recorders" } },
+  { value: "poe-switches", label: { sq: "PoE Switches", en: "PoE Switches" } },
+  { value: "wifi-cameras", label: { sq: "Kamera Wi-Fi", en: "Wi-Fi Cameras" } },
+  { value: "accessories", label: { sq: "Aksesore", en: "Accessories" } },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
+  const productsRef = useRef<HTMLDivElement>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pathname = usePathname();
   const { lang, setLang, tr } = useLang();
   const { count, setOpen: setCartOpen } = useCart();
 
-  useEffect(() => { setOpen(false); }, [pathname]);
+  useEffect(() => { setOpen(false); setProductsOpen(false); }, [pathname]);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handler, { passive: true });
     return () => window.removeEventListener("scroll", handler);
   }, []);
+
+  function onProductsEnter() {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setProductsOpen(true);
+  }
+
+  function onProductsLeave() {
+    timeoutRef.current = setTimeout(() => setProductsOpen(false), 150);
+  }
+
+  const productsActive = pathname === "/products" || pathname.startsWith("/products/");
 
   return (
     <>
@@ -42,7 +59,47 @@ export default function Navbar() {
           </Link>
 
           <nav className="hidden md:flex items-center gap-1 flex-1">
-            {NAV_KEYS.map((l) => {
+            {/* Products with dropdown */}
+            <div
+              ref={productsRef}
+              className="relative"
+              onMouseEnter={onProductsEnter}
+              onMouseLeave={onProductsLeave}
+            >
+              <Link href="/products"
+                className={`flex items-center gap-1 px-3.5 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  productsActive ? "text-gray-900 bg-gray-100" : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"
+                }`}>
+                {tr("nav_products")}
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${productsOpen ? "rotate-180" : ""}`} />
+              </Link>
+
+              {/* Dropdown */}
+              {productsOpen && (
+                <div className="absolute top-full left-0 mt-1 w-52 bg-white border border-gray-200 rounded-xl shadow-lg py-1.5 z-50">
+                  <Link href="/products"
+                    className="flex items-center px-4 py-2.5 text-sm text-gray-500 hover:text-gray-900 hover:bg-gray-50 font-medium transition-colors border-b border-gray-100 mb-1">
+                    {lang === "sq" ? "Të gjitha produktet" : "All Products"}
+                  </Link>
+                  {CATEGORIES.map((cat) => (
+                    <Link
+                      key={cat.value}
+                      href={`/products?category=${cat.value}`}
+                      className="flex items-center px-4 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors"
+                    >
+                      {cat.label[lang]}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Other nav links */}
+            {[
+              { href: "/services", key: "nav_services" as const },
+              { href: "/about", key: "nav_about" as const },
+              { href: "/contact", key: "nav_contact" as const },
+            ].map((l) => {
               const active = pathname === l.href || pathname.startsWith(l.href + "/");
               return (
                 <Link key={l.href} href={l.href}
@@ -68,7 +125,6 @@ export default function Navbar() {
               +383 45 460 460
             </a>
 
-            {/* Cart button */}
             <button onClick={() => setCartOpen(true)}
               className="relative p-2 rounded-lg hover:bg-gray-100 transition-colors text-gray-600 hover:text-gray-900">
               <ShoppingBag className="w-5 h-5" />
@@ -111,7 +167,23 @@ export default function Navbar() {
         open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
       }`}>
         <nav className="px-5 py-4 flex flex-col gap-1">
-          {NAV_KEYS.map((l) => (
+          <Link href="/products" onClick={() => setOpen(false)}
+            className={`px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
+              productsActive ? "bg-gray-100 text-gray-900" : "text-gray-600 hover:bg-gray-50"
+            }`}>
+            {tr("nav_products")}
+          </Link>
+          {CATEGORIES.map((cat) => (
+            <Link key={cat.value} href={`/products?category=${cat.value}`} onClick={() => setOpen(false)}
+              className="px-7 py-2 rounded-xl text-xs text-gray-500 hover:bg-gray-50 transition-colors">
+              {cat.label[lang]}
+            </Link>
+          ))}
+          {[
+            { href: "/services", key: "nav_services" as const },
+            { href: "/about", key: "nav_about" as const },
+            { href: "/contact", key: "nav_contact" as const },
+          ].map((l) => (
             <Link key={l.href} href={l.href} onClick={() => setOpen(false)}
               className={`px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
                 pathname === l.href ? "bg-gray-100 text-gray-900" : "text-gray-600 hover:bg-gray-50"

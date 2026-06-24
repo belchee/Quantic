@@ -3,6 +3,7 @@
 import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { SlidersHorizontal, X, ChevronDown, Search } from "lucide-react";
 import { useLang } from "@/lib/i18n";
 
@@ -24,6 +25,7 @@ export default function ProductsPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [search, setSearch] = useState("");
   const { tr } = useLang();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     Promise.all([
@@ -34,9 +36,11 @@ export default function ProductsPage() {
       setCategories(cats);
       const prices = prods.map((p: Product) => p.price);
       setPriceRange([Math.min(...prices), Math.max(...prices)]);
+      const cat = searchParams.get("category");
+      if (cat) setSelectedCategories([cat]);
       setLoading(false);
     });
-  }, []);
+  }, [searchParams]);
 
   const minP = products.length ? Math.min(...products.map((p) => p.price)) : 0;
   const maxP = products.length ? Math.max(...products.map((p) => p.price)) : 9999;
