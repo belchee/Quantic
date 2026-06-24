@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import { LangProvider } from "@/lib/i18n";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -19,39 +20,37 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: {
-    default: "Quantic SHPK — Security & Technology Solutions",
+    default: "Quantic SHPK — Sisteme Sigurie & Teknologji",
     template: "%s | Quantic SHPK",
   },
   description:
-    "Professional CCTV, alarm systems, fiber optic, and network infrastructure installation in Kosovo. Trusted by businesses across the region.",
+    "Kamera CCTV, sisteme alarmi, fiber optike dhe infrastrukturë rrjeti — instalim profesional në Kosovë.",
   keywords: [
-    "CCTV installation Kosovo",
-    "security cameras Prishtinë",
-    "fiber optic Kosovo",
-    "alarm systems",
-    "Tiandy Dahua Kosovo",
-    "network infrastructure",
+    "kamera sigurie Kosovë",
+    "CCTV Prishtinë",
+    "fiber optike Kosovë",
+    "sisteme alarmi",
+    "Tiandy Dahua Kosovë",
+    "infrastrukturë rrjeti",
   ],
   metadataBase: new URL("https://quanticshpk.com"),
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "sq_AL",
     siteName: "Quantic SHPK",
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
+    <html lang="sq" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body className="bg-white text-gray-900 font-sans antialiased">
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-        <WhatsAppButton />
+        <LangProvider>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+          <WhatsAppButton />
+        </LangProvider>
       </body>
     </html>
   );
