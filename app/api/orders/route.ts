@@ -143,3 +143,10 @@ export async function PATCH(req: NextRequest) {
   if (error) return NextResponse.json({ ok: false }, { status: 500 });
   return NextResponse.json({ ok: true });
 }
+
+export async function DELETE(req: NextRequest) {
+  const { id } = await req.json();
+  const { error } = await getSupabase().from("orders").delete().eq("id", id);
+  if (error) return NextResponse.json({ ok: false }, { status: 500 });
+  return NextResponse.json({ ok: true });
+}

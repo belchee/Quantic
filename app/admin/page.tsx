@@ -11,6 +11,7 @@ import {
 /* ─── Types ─── */
 interface Product {
   id: string; name: string; model: string; category: string;
+  brand?: string;
   price: number; originalPrice?: number; image: string;
   shortDesc?: string; specs: string[]; inStock: boolean;
 }
@@ -24,6 +25,7 @@ interface HeroData {
 
 const EMPTY_PRODUCT: Partial<Product> = {
   id: "", name: "", model: "", category: "bullet-cameras",
+  brand: "",
   price: 0, originalPrice: undefined, image: "",
   shortDesc: "", specs: [], inStock: true,
 };
@@ -362,15 +364,15 @@ function ProductsTab({ categories }: { categories: Category[] }) {
                   <label className="block text-xs font-semibold text-gray-600 mb-1">Modeli *</label>
                   <input value={editing.model ?? ""} onChange={(e) => {
                     const model = e.target.value;
-                    const detected = ["Tiandy","TVT"].find(b => model.toLowerCase().includes(b.toLowerCase())) ?? (editing as Record<string,unknown>).brand as string ?? "";
-                    setEditing({ ...editing, model, brand: detected } as typeof editing);
+                    const detected = ["Tiandy","TVT"].find(b => model.toLowerCase().includes(b.toLowerCase())) ?? editing.brand ?? "";
+                    setEditing({ ...editing, model, brand: detected });
                   }}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-blue-400"
                     placeholder="TC-C32WP-I3W" />
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-gray-600 mb-1">Brendi</label>
-                  <select value={(editing as Record<string,unknown>).brand as string ?? ""} onChange={(e) => setEditing({ ...editing, brand: e.target.value } as typeof editing)}
+                  <select value={editing.brand ?? ""} onChange={(e) => setEditing({ ...editing, brand: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-blue-400 bg-white">
                     <option value="">— Zgjidh brendin —</option>
                     <option value="Tiandy">Tiandy</option>
@@ -863,6 +865,17 @@ function OrdersTab() {
     await load();
   }
 
+  async function deleteOrder(id: string) {
+    if (!confirm("Fshi këtë porosi? Kjo nuk mund të kthehet mbrapsht.")) return;
+    await fetch("/api/orders", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id }),
+    });
+    setSelected(null);
+    await load();
+  }
+
   const statusConfig: Record<string, { label: string; color: string; icon: React.ElementType }> = {
     pending: { label: "Në pritje", color: "bg-amber-50 text-amber-700 border-amber-200", icon: Clock },
     confirmed: { label: "Konfirmuar", color: "bg-green-50 text-green-700 border-green-200", icon: CheckCircle },
@@ -939,6 +952,10 @@ function OrdersTab() {
                             </button>
                           </>
                         )}
+                        <button onClick={() => deleteOrder(o.id)}
+                          className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
                       </div>
                     </td>
                   </tr>
@@ -995,6 +1012,10 @@ function OrdersTab() {
                   </button>
                 </div>
               )}
+              <button onClick={() => deleteOrder(selected.id)}
+                className="w-full py-2.5 text-sm font-semibold text-red-600 hover:bg-red-50 rounded-xl transition-colors border border-red-200 flex items-center justify-center gap-2">
+                <Trash2 className="w-4 h-4" /> Fshi porosinë
+              </button>
             </div>
           </div>
         </div>
