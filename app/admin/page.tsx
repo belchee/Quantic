@@ -392,51 +392,35 @@ function ProductsTab({ categories }: { categories: Category[] }) {
 
               {/* Specs */}
               <div>
-                <div className="flex items-center justify-between mb-2">
-                  <label className="block text-xs font-semibold text-gray-600">Specifikimet</label>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const ta = document.getElementById("spec-paste-area") as HTMLTextAreaElement | null;
-                      if (ta) ta.classList.toggle("hidden");
-                    }}
-                    className="text-xs text-blue-600 hover:underline">
-                    Ngjit tabelën e specifikimeve
-                  </button>
-                </div>
+                <label className="block text-xs font-semibold text-gray-600 mb-1">Specifikimet</label>
+                <p className="text-xs text-gray-400 mb-2">Kopjo tabelën e specifikimeve nga faqja e prodhuesit dhe ngjite poshtë — do të shtohen automatikisht.</p>
 
-                {/* Bulk paste area */}
-                <div id="spec-paste-area" className="hidden mb-3">
-                  <textarea
-                    rows={6}
-                    className="w-full px-3 py-2 border border-blue-300 rounded-lg text-xs font-mono focus:outline-none focus:border-blue-500 bg-blue-50"
-                    placeholder={"Ngjit specifiikimet këtu (çdo rresht: Emri\tVlera ose Emri: Vlera)\n\nShembull:\nImage Sensor\t1/2.7\" CMOS\nIR Distance\tUp to 30 m"}
-                    onPaste={(e) => {
-                      e.preventDefault();
-                      const text = e.clipboardData.getData("text");
-                      const lines = text.split("\n").map(l => l.trim()).filter(Boolean);
-                      const parsed: string[] = [];
-                      for (const line of lines) {
-                        if (line.includes("\t")) {
-                          const [key, ...rest] = line.split("\t");
-                          if (key && rest.length) parsed.push(`${key.trim()}: ${rest.join(" ").trim()}`);
-                        } else if (line.includes(":")) {
-                          parsed.push(line.trim());
-                        }
+                {/* Primary: bulk paste textarea */}
+                <textarea
+                  rows={4}
+                  className="w-full px-3 py-2 border border-blue-200 rounded-xl text-xs font-mono focus:outline-none focus:border-blue-400 bg-blue-50 mb-3 resize-none"
+                  placeholder={"Ngjit këtu tabelën e specifikimeve (Ctrl+V)...\n\nShembull:\nImage Sensor\t1/2.7\" CMOS\nIR Distance\tUp to 30 m\nPoer Supply\tPoE IEEE 802.3af"}
+                  onPaste={(e) => {
+                    e.preventDefault();
+                    const text = e.clipboardData.getData("text");
+                    const lines = text.split("\n").map((l: string) => l.trim()).filter(Boolean);
+                    const parsed: string[] = [];
+                    for (const line of lines) {
+                      if (line.includes("\t")) {
+                        const [key, ...rest] = line.split("\t");
+                        if (key && rest.length) parsed.push(`${key.trim()}: ${rest.join(" ").trim()}`);
+                      } else if (line.includes(":")) {
+                        parsed.push(line.trim());
                       }
-                      if (parsed.length) {
-                        setEditing({ ...editing, specs: [...(editing.specs ?? []), ...parsed] });
-                        (e.target as HTMLTextAreaElement).value = `✓ ${parsed.length} specifikime u shtuan`;
-                        setTimeout(() => {
-                          const ta = document.getElementById("spec-paste-area");
-                          if (ta) ta.classList.add("hidden");
-                        }, 1500);
-                      }
-                    }}
-                  />
-                  <p className="text-xs text-gray-400 mt-1">Kopjo kolonën e specifikimeve nga faqja e prodhuesit dhe ngjite këtu</p>
-                </div>
+                    }
+                    if (parsed.length) {
+                      setEditing({ ...editing, specs: parsed });
+                      (e.target as HTMLTextAreaElement).value = `✓ ${parsed.length} specifikimet u shtuan! Mund t'i shikosh poshtë.`;
+                    }
+                  }}
+                />
 
+                {/* Manual one-by-one add */}
                 <div className="flex gap-2 mb-2">
                   <input value={specInput} onChange={(e) => setSpecInput(e.target.value)}
                     onKeyDown={(e) => {
@@ -447,7 +431,7 @@ function ProductsTab({ categories }: { categories: Category[] }) {
                       }
                     }}
                     className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-blue-400"
-                    placeholder="Image Sensor: 1/2.7&quot; CMOS  (shtypni Enter)" />
+                    placeholder='Shto manual: "Image Sensor: 1/2.7 CMOS" + Enter' />
                   <button onClick={() => { if (specInput.trim()) { setEditing({ ...editing, specs: [...(editing.specs ?? []), specInput.trim()] }); setSpecInput(""); } }}
                     className="px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm transition-colors">Shto</button>
                 </div>
