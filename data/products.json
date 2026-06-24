@@ -1,0 +1,794 @@
+[
+  {
+    "id": "tc-c32wp-i3w",
+    "name": "2MP Full Color WiFi Bullet Camera",
+    "model": "TC-C32WP-I3W",
+    "category": "bullet-cameras",
+    "price": 29,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "2MP Full Color WiFi Bullet, 30m white-light, H.265+",
+    "specs": [
+      "2MP (1920×1080) Full Color sensor",
+      "Built-in WiFi 2.4GHz 802.11b/g/n",
+      "30m white-light illumination",
+      "H.265+ video compression",
+      "IP67 weatherproof",
+      "Built-in mic"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-c34wp-i3w",
+    "name": "4MP Full Color WiFi Bullet Camera",
+    "model": "TC-C34WP-I3W",
+    "category": "bullet-cameras",
+    "price": 39,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "4MP Full Color WiFi Bullet, 30m white-light, H.265+",
+    "specs": [
+      "4MP (2560×1440) Full Color sensor",
+      "Built-in WiFi 2.4GHz 802.11b/g/n",
+      "30m white-light illumination",
+      "H.265+ video compression",
+      "IP67 weatherproof",
+      "Built-in mic"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-c32hn-i8",
+    "name": "2MP IR Bullet Camera 60m",
+    "model": "TC-C32HN-I8",
+    "category": "bullet-cameras",
+    "price": 22,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "2MP IR Bullet, 60m infrared range, H.265+",
+    "specs": [
+      "2MP (1920×1080) sensor",
+      "60m IR illumination",
+      "H.265+ video compression",
+      "IP67 weatherproof",
+      "3.6mm fixed lens",
+      "PoE powered"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-c34hn-i8",
+    "name": "4MP IR Bullet Camera 60m",
+    "model": "TC-C34HN-I8",
+    "category": "bullet-cameras",
+    "price": 32,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "4MP IR Bullet, 60m infrared range, H.265+",
+    "specs": [
+      "4MP (2560×1440) sensor",
+      "60m IR illumination",
+      "H.265+ video compression",
+      "IP67 weatherproof",
+      "2.8mm or 4mm lens options",
+      "PoE powered"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-c38hn-i8",
+    "name": "8MP IR Bullet Camera 60m",
+    "model": "TC-C38HN-I8",
+    "category": "bullet-cameras",
+    "price": 59,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "8MP 4K IR Bullet, 60m infrared range, H.265+",
+    "specs": [
+      "8MP (3840×2160) 4K sensor",
+      "60m IR illumination",
+      "H.265+ video compression",
+      "IP67 weatherproof",
+      "2.8mm fixed lens",
+      "PoE powered"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-c32qn-i5",
+    "name": "2MP QHDX Bullet Camera",
+    "model": "TC-C32QN-I5",
+    "category": "bullet-cameras",
+    "price": 25,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "2MP QHDX Bullet, 50m IR, H.265+, Smart detection",
+    "specs": [
+      "2MP QHDX sensor",
+      "50m IR illumination",
+      "H.265+ video compression",
+      "Smart motion detection",
+      "IP67 weatherproof",
+      "PoE powered"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-c34qn-i5",
+    "name": "4MP QHDX Bullet Camera",
+    "model": "TC-C34QN-I5",
+    "category": "bullet-cameras",
+    "price": 35,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "4MP QHDX Bullet, 50m IR, H.265+, Smart detection",
+    "specs": [
+      "4MP QHDX sensor",
+      "50m IR illumination",
+      "H.265+ video compression",
+      "Smart motion detection",
+      "IP67 weatherproof",
+      "PoE powered"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-c38qn-i5",
+    "name": "8MP QHDX Bullet Camera",
+    "model": "TC-C38QN-I5",
+    "category": "bullet-cameras",
+    "price": 62,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "8MP 4K QHDX Bullet, 50m IR, H.265+",
+    "specs": [
+      "8MP 4K QHDX sensor",
+      "50m IR illumination",
+      "H.265+ video compression",
+      "Smart motion detection",
+      "IP67 weatherproof",
+      "PoE powered"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-c32xp-i3w",
+    "name": "2MP Full Starlight WiFi Bullet",
+    "model": "TC-C32XP-I3W",
+    "category": "wifi-cameras",
+    "price": 34,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "2MP Starlight color WiFi Bullet, 30m, H.265+",
+    "specs": [
+      "2MP Full Starlight sensor",
+      "Built-in WiFi 2.4GHz",
+      "30m illumination range",
+      "H.265+ video compression",
+      "IP67 weatherproof",
+      "Two-way audio"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-c34xp-i3w",
+    "name": "4MP Full Starlight WiFi Bullet",
+    "model": "TC-C34XP-I3W",
+    "category": "wifi-cameras",
+    "price": 44,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "4MP Starlight color WiFi Bullet, 30m, H.265+",
+    "specs": [
+      "4MP Full Starlight sensor",
+      "Built-in WiFi 2.4GHz",
+      "30m illumination range",
+      "H.265+ video compression",
+      "IP67 weatherproof",
+      "Two-way audio"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-c32ws-i3w",
+    "name": "2MP WiFi Dome Camera",
+    "model": "TC-C32WS-I3W",
+    "category": "wifi-cameras",
+    "price": 27,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "2MP Full Color WiFi Dome, 30m white-light, H.265+",
+    "specs": [
+      "2MP (1920×1080) Full Color sensor",
+      "Built-in WiFi 2.4GHz",
+      "30m white-light illumination",
+      "H.265+ video compression",
+      "IP67 weatherproof",
+      "Built-in mic"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-c34ws-i3w",
+    "name": "4MP WiFi Dome Camera",
+    "model": "TC-C34WS-I3W",
+    "category": "wifi-cameras",
+    "price": 37,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "4MP Full Color WiFi Dome, 30m white-light, H.265+",
+    "specs": [
+      "4MP (2560×1440) Full Color sensor",
+      "Built-in WiFi 2.4GHz",
+      "30m white-light illumination",
+      "H.265+ video compression",
+      "IP67 weatherproof",
+      "Built-in mic"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-c32hs-i3",
+    "name": "2MP IR Dome Camera",
+    "model": "TC-C32HS-I3",
+    "category": "dome-cameras",
+    "price": 21,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "2MP IR Dome, 30m infrared, H.265+, PoE",
+    "specs": [
+      "2MP (1920×1080) sensor",
+      "30m IR illumination",
+      "H.265+ video compression",
+      "IP67 weatherproof",
+      "2.8mm fixed lens",
+      "PoE powered"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-c34hs-i3",
+    "name": "4MP IR Dome Camera",
+    "model": "TC-C34HS-I3",
+    "category": "dome-cameras",
+    "price": 31,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "4MP IR Dome, 30m infrared, H.265+, PoE",
+    "specs": [
+      "4MP (2560×1440) sensor",
+      "30m IR illumination",
+      "H.265+ video compression",
+      "IP67 weatherproof",
+      "2.8mm or 4mm lens options",
+      "PoE powered"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-c38hs-i3",
+    "name": "8MP IR Dome Camera",
+    "model": "TC-C38HS-I3",
+    "category": "dome-cameras",
+    "price": 57,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "8MP 4K IR Dome, 30m infrared, H.265+, PoE",
+    "specs": [
+      "8MP (3840×2160) 4K sensor",
+      "30m IR illumination",
+      "H.265+ video compression",
+      "IP67 weatherproof",
+      "2.8mm fixed lens",
+      "PoE powered"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-c32qs-i5",
+    "name": "2MP QHDX Dome Camera",
+    "model": "TC-C32QS-I5",
+    "category": "dome-cameras",
+    "price": 24,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "2MP QHDX Dome, 50m IR, smart detection, PoE",
+    "specs": [
+      "2MP QHDX sensor",
+      "50m IR illumination",
+      "H.265+ video compression",
+      "Smart motion detection",
+      "IP67 weatherproof",
+      "PoE powered"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-c34qs-i5",
+    "name": "4MP QHDX Dome Camera",
+    "model": "TC-C34QS-I5",
+    "category": "dome-cameras",
+    "price": 34,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "4MP QHDX Dome, 50m IR, smart detection, PoE",
+    "specs": [
+      "4MP QHDX sensor",
+      "50m IR illumination",
+      "H.265+ video compression",
+      "Smart motion detection",
+      "IP67 weatherproof",
+      "PoE powered"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-c38qs-i5",
+    "name": "8MP QHDX Dome Camera",
+    "model": "TC-C38QS-I5",
+    "category": "dome-cameras",
+    "price": 60,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "8MP 4K QHDX Dome, 50m IR, smart detection, PoE",
+    "specs": [
+      "8MP 4K QHDX sensor",
+      "50m IR illumination",
+      "H.265+ video compression",
+      "Smart motion detection",
+      "IP67 weatherproof",
+      "PoE powered"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-c32fn-i3",
+    "name": "2MP Fisheye 360° Camera",
+    "model": "TC-C32FN-I3",
+    "category": "dome-cameras",
+    "price": 38,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "2MP Fisheye 360° panoramic dome, H.265+",
+    "specs": [
+      "2MP sensor with 360° fisheye lens",
+      "Full panoramic coverage",
+      "H.265+ video compression",
+      "IP66 weatherproof",
+      "Multiple dewarping modes",
+      "PoE powered"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-c34fn-i3",
+    "name": "4MP Fisheye 360° Camera",
+    "model": "TC-C34FN-I3",
+    "category": "dome-cameras",
+    "price": 49,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "4MP Fisheye 360° panoramic dome, H.265+",
+    "specs": [
+      "4MP sensor with 360° fisheye lens",
+      "Full panoramic coverage",
+      "H.265+ video compression",
+      "IP66 weatherproof",
+      "Multiple dewarping modes",
+      "PoE powered"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-h324s-i3",
+    "name": "4MP 4x Zoom PTZ Camera",
+    "model": "TC-H324S-I3",
+    "category": "ptz-cameras",
+    "price": 89,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "4MP PTZ, 4x optical zoom, 50m IR, H.265+",
+    "specs": [
+      "4MP (2560×1440) sensor",
+      "4x optical zoom lens",
+      "50m IR illumination",
+      "Pan/Tilt/Zoom motorized",
+      "H.265+ video compression",
+      "IP66 weatherproof"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-h325s-i3",
+    "name": "5MP 4x Zoom PTZ Camera",
+    "model": "TC-H325S-I3",
+    "category": "ptz-cameras",
+    "price": 99,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "5MP PTZ, 4x optical zoom, 50m IR, H.265+",
+    "specs": [
+      "5MP sensor",
+      "4x optical zoom lens",
+      "50m IR illumination",
+      "Pan/Tilt/Zoom motorized",
+      "H.265+ video compression",
+      "IP66 weatherproof"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-h326s-i3",
+    "name": "6MP 4x Zoom PTZ Camera",
+    "model": "TC-H326S-I3",
+    "category": "ptz-cameras",
+    "price": 109,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "6MP PTZ, 4x optical zoom, 50m IR, H.265+",
+    "specs": [
+      "6MP sensor",
+      "4x optical zoom lens",
+      "50m IR illumination",
+      "Pan/Tilt/Zoom motorized",
+      "H.265+ video compression",
+      "IP66 weatherproof"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-h358s-e27",
+    "name": "8MP 27x Zoom PTZ Camera",
+    "model": "TC-H358S-E27",
+    "category": "ptz-cameras",
+    "price": 249,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "8MP 4K PTZ, 27x optical zoom, 100m IR, auto-tracking",
+    "specs": [
+      "8MP (3840×2160) 4K sensor",
+      "27x optical zoom",
+      "100m IR illumination",
+      "Auto-tracking function",
+      "H.265+ video compression",
+      "IP66 weatherproof"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-h358m-e30",
+    "name": "8MP 30x Zoom PTZ Camera",
+    "model": "TC-H358M-E30",
+    "category": "ptz-cameras",
+    "price": 289,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "8MP 4K PTZ, 30x optical zoom, 120m IR, auto-tracking",
+    "specs": [
+      "8MP (3840×2160) 4K sensor",
+      "30x optical zoom",
+      "120m IR illumination",
+      "Auto-tracking function",
+      "H.265+ video compression",
+      "IP66 weatherproof"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-na501-i",
+    "name": "5MP Speed Dome Camera",
+    "model": "TC-NA501-I",
+    "category": "ptz-cameras",
+    "price": 179,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "5MP Speed Dome, 20x optical zoom, 100m IR",
+    "specs": [
+      "5MP sensor",
+      "20x optical zoom",
+      "100m IR illumination",
+      "360° continuous pan",
+      "H.265+ video compression",
+      "IP66 weatherproof"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-r3104h-i4",
+    "name": "4-Channel NVR",
+    "model": "TC-R3104H-I4",
+    "category": "nvr",
+    "price": 59,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "4-channel NVR, up to 8MP, H.265+, 1x HDD bay",
+    "specs": [
+      "4 IP camera channels",
+      "Supports up to 8MP cameras",
+      "H.265+ decoding",
+      "1x HDD bay (up to 8TB)",
+      "HDMI + VGA output",
+      "Remote access via mobile app"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-r3108-i8",
+    "name": "8-Channel NVR",
+    "model": "TC-R3108-I8",
+    "category": "nvr",
+    "price": 79,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "8-channel NVR, up to 8MP, H.265+, 2x HDD bays",
+    "specs": [
+      "8 IP camera channels",
+      "Supports up to 8MP cameras",
+      "H.265+ decoding",
+      "2x HDD bays (up to 8TB each)",
+      "HDMI + VGA output",
+      "Remote access via mobile app"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-r3116-i8",
+    "name": "16-Channel NVR",
+    "model": "TC-R3116-I8",
+    "category": "nvr",
+    "price": 119,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "16-channel NVR, up to 8MP, H.265+, 2x HDD bays",
+    "specs": [
+      "16 IP camera channels",
+      "Supports up to 8MP cameras",
+      "H.265+ decoding",
+      "2x HDD bays (up to 10TB each)",
+      "HDMI + VGA output",
+      "Remote access via mobile app"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-r3132-i8",
+    "name": "32-Channel NVR",
+    "model": "TC-R3132-I8",
+    "category": "nvr",
+    "price": 189,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "32-channel NVR, up to 8MP, H.265+, 2x HDD bays",
+    "specs": [
+      "32 IP camera channels",
+      "Supports up to 8MP cameras",
+      "H.265+ decoding",
+      "2x HDD bays (up to 10TB each)",
+      "HDMI + VGA output",
+      "Remote access via mobile app"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-r3208-e16",
+    "name": "8-Channel 4K NVR",
+    "model": "TC-R3208-E16",
+    "category": "nvr",
+    "price": 95,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "8-channel 4K NVR, up to 16MP, H.265+, 2x HDD bays",
+    "specs": [
+      "8 IP camera channels",
+      "Supports up to 16MP cameras",
+      "4K HDMI output",
+      "H.265+ decoding",
+      "2x HDD bays (up to 10TB each)",
+      "AI smart detection support"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-r3216-e16",
+    "name": "16-Channel 4K NVR",
+    "model": "TC-R3216-E16",
+    "category": "nvr",
+    "price": 145,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "16-channel 4K NVR, up to 16MP, H.265+, 2x HDD bays",
+    "specs": [
+      "16 IP camera channels",
+      "Supports up to 16MP cameras",
+      "4K HDMI output",
+      "H.265+ decoding",
+      "2x HDD bays (up to 10TB each)",
+      "AI smart detection support"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-r3232-e32",
+    "name": "32-Channel 4K NVR",
+    "model": "TC-R3232-E32",
+    "category": "nvr",
+    "price": 229,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "32-channel 4K NVR, H.265+, 4x HDD bays, AI analytics",
+    "specs": [
+      "32 IP camera channels",
+      "Supports up to 16MP cameras",
+      "4K HDMI output",
+      "H.265+ decoding",
+      "4x HDD bays (up to 10TB each)",
+      "AI smart detection support"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-r3264-e32",
+    "name": "64-Channel NVR",
+    "model": "TC-R3264-E32",
+    "category": "nvr",
+    "price": 379,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "64-channel enterprise NVR, H.265+, 8x HDD bays",
+    "specs": [
+      "64 IP camera channels",
+      "Supports up to 16MP cameras",
+      "4K HDMI output",
+      "H.265+ decoding",
+      "8x HDD bays (RAID support)",
+      "Enterprise AI analytics"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-w208m-w4",
+    "name": "8-Channel WiFi NVR Kit (4 cameras)",
+    "model": "TC-W208M-W4",
+    "category": "nvr",
+    "price": 179,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "8-ch WiFi NVR kit with 4×2MP Full Color cameras, plug & play",
+    "specs": [
+      "8-channel WiFi NVR",
+      "4× 2MP Full Color WiFi cameras included",
+      "Plug & play setup, no cabling needed",
+      "30m white-light per camera",
+      "1x HDD bay (HDD not included)",
+      "Mobile app remote access"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-w216m-w8",
+    "name": "16-Channel WiFi NVR Kit (8 cameras)",
+    "model": "TC-W216M-W8",
+    "category": "nvr",
+    "price": 289,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "16-ch WiFi NVR kit with 8×4MP Full Color cameras",
+    "specs": [
+      "16-channel WiFi NVR",
+      "8× 4MP Full Color WiFi cameras included",
+      "Plug & play setup, no cabling needed",
+      "30m white-light per camera",
+      "2x HDD bays (HDD not included)",
+      "Mobile app remote access"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-s1008p8",
+    "name": "8-Port PoE Switch",
+    "model": "TC-S1008P8",
+    "category": "poe-switches",
+    "price": 39,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "8-port unmanaged PoE switch, 802.3af/at, 60W total",
+    "specs": [
+      "8× 10/100Mbps PoE ports",
+      "802.3af/at PoE standard",
+      "60W total PoE budget",
+      "2× uplink ports 1Gbps",
+      "Unmanaged, plug & play",
+      "Fanless design"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-s1016p8",
+    "name": "16-Port PoE Switch",
+    "model": "TC-S1016P8",
+    "category": "poe-switches",
+    "price": 65,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "16-port unmanaged PoE switch, 802.3af/at, 120W total",
+    "specs": [
+      "16× 10/100Mbps PoE ports",
+      "802.3af/at PoE standard",
+      "120W total PoE budget",
+      "2× uplink ports 1Gbps",
+      "Unmanaged, plug & play",
+      "Fanless design"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-s1024p8",
+    "name": "24-Port PoE Switch",
+    "model": "TC-S1024P8",
+    "category": "poe-switches",
+    "price": 99,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "24-port unmanaged PoE switch, 802.3af/at, 200W total",
+    "specs": [
+      "24× 10/100Mbps PoE ports",
+      "802.3af/at PoE standard",
+      "200W total PoE budget",
+      "4× uplink ports 1Gbps",
+      "Unmanaged, plug & play",
+      "19-inch rack mountable"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-s4048p8y2q",
+    "name": "48-Port PoE Managed Switch",
+    "model": "TC-S4048P8Y2Q",
+    "category": "poe-switches",
+    "price": 179,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "48-port managed PoE switch, 802.3af/at, 370W, VLAN",
+    "specs": [
+      "48× 10/100Mbps PoE ports",
+      "802.3af/at PoE standard",
+      "370W total PoE budget",
+      "2× 10GbE SFP+ uplinks",
+      "Managed with VLAN, QoS support",
+      "19-inch rack mountable"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-hdd2t",
+    "name": "2TB HDD for NVR",
+    "model": "TC-HDD2T",
+    "category": "accessories",
+    "price": 49,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "2TB surveillance-grade hard drive, compatible with Tiandy NVRs",
+    "specs": [
+      "2TB storage capacity",
+      "Surveillance-grade HDD",
+      "3.5-inch SATA interface",
+      "24/7 continuous recording optimized",
+      "Compatible with all Tiandy NVRs",
+      "2-year warranty"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-hdd4t",
+    "name": "4TB HDD for NVR",
+    "model": "TC-HDD4T",
+    "category": "accessories",
+    "price": 79,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "4TB surveillance-grade hard drive, compatible with Tiandy NVRs",
+    "specs": [
+      "4TB storage capacity",
+      "Surveillance-grade HDD",
+      "3.5-inch SATA interface",
+      "24/7 continuous recording optimized",
+      "Compatible with all Tiandy NVRs",
+      "2-year warranty"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-mdd6w",
+    "name": "Motorized Camera Bracket",
+    "model": "TC-MDD6W",
+    "category": "accessories",
+    "price": 12,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "Motorized adjustable bracket for dome and bullet cameras",
+    "specs": [
+      "Universal camera mounting bracket",
+      "Motorized tilt adjustment",
+      "Zinc alloy construction",
+      "Weather-resistant coating",
+      "Max load: 3kg",
+      "Compatible with standard camera mounts"
+    ],
+    "inStock": true
+  },
+  {
+    "id": "tc-wdb6",
+    "name": "Wall Mount Bracket",
+    "model": "TC-WDB6",
+    "category": "accessories",
+    "price": 8,
+    "image": "/placeholder-product.svg",
+    "shortDesc": "Universal wall mount bracket for IP cameras",
+    "specs": [
+      "Universal wall mount bracket",
+      "Steel construction",
+      "Weather-resistant finish",
+      "Adjustable angle",
+      "Max load: 2kg",
+      "Includes mounting hardware"
+    ],
+    "inStock": true
+  }
+]
