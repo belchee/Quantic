@@ -80,7 +80,6 @@ export default function Hero() {
             <Image src="/brand-tiandy.svg" alt="Tiandy" width={200} height={60} className="h-12 w-auto object-contain" />
             <Image src="/brand-tvt.svg" alt="TVT" width={200} height={60} className="h-12 w-auto object-contain" />
             <Image src="/brand-fourth.svg" alt="Brand" width={120} height={60} className="h-12 w-auto object-contain" />
-            <Image src="/brand-dahua.svg" alt="Dahua" width={200} height={60} className="h-12 w-auto object-contain" />
           </div>
           <div className="text-center mt-10">
             <Link href="/products"

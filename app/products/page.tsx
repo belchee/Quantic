@@ -15,7 +15,7 @@ interface Product {
 
 interface Category { value: string; label: string }
 
-const KNOWN_BRANDS = ["Tiandy", "Dahua", "TVT"];
+const KNOWN_BRANDS = ["Tiandy", "TVT"];
 
 function detectBrand(p: Product): string {
   if (p.brand) return p.brand;

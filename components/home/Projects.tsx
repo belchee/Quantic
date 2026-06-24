@@ -15,7 +15,7 @@ const projects = [
     title: "Office IP Camera Installation",
     category: "Surveillance",
     image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80",
-    desc: "16-camera Dahua system with NVR and mobile monitoring for a corporate office.",
+    desc: "16-camera Tiandy system with NVR and mobile monitoring for a corporate office.",
   },
   {
     title: "Fiber Optic Backbone Deployment",
