@@ -72,7 +72,10 @@ export default function ProductPageClient({ slug }: { slug: string }) {
   const disc = orig ? Math.round(((orig - product.price) / orig) * 100) : 0;
 
   // Parse specs into {label, value} pairs
-  const parsedSpecs = (product.specs ?? []).map((s) => {
+  const parsedSpecs = (product.specs ?? []).filter((s) => {
+    const lower = s.toLowerCase();
+    return !(lower.startsWith("category") && lower.includes("specification"));
+  }).map((s) => {
     const colonIdx = s.indexOf(":");
     if (colonIdx > 0) {
       return { label: s.slice(0, colonIdx).trim(), value: s.slice(colonIdx + 1).trim() };
@@ -229,7 +232,7 @@ export default function ProductPageClient({ slug }: { slug: string }) {
               </div>
               {parsedSpecs.map((s, i) => (
                 <div key={i} className={`grid grid-cols-2 border-b border-gray-100 last:border-0 ${i % 2 === 0 ? "bg-white" : "bg-gray-50"}`}>
-                  <div className="px-5 py-3 text-sm font-medium text-blue-700">{s.label ?? "—"}</div>
+                  <div className="px-5 py-3 text-sm font-medium text-gray-800">{s.label ?? "—"}</div>
                   <div className="px-5 py-3 text-sm text-gray-700 border-l border-gray-100">{s.value}</div>
                 </div>
               ))}
