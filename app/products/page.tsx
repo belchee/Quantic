@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
@@ -16,6 +16,14 @@ interface Product {
 interface Category { value: string; label: string }
 
 export default function ProductsPage() {
+  return (
+    <Suspense>
+      <ProductsInner />
+    </Suspense>
+  );
+}
+
+function ProductsInner() {
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
