@@ -392,7 +392,51 @@ function ProductsTab({ categories }: { categories: Category[] }) {
 
               {/* Specs */}
               <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-2">Specifikimet</label>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="block text-xs font-semibold text-gray-600">Specifikimet</label>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const ta = document.getElementById("spec-paste-area") as HTMLTextAreaElement | null;
+                      if (ta) ta.classList.toggle("hidden");
+                    }}
+                    className="text-xs text-blue-600 hover:underline">
+                    Ngjit tabelën e specifikimeve
+                  </button>
+                </div>
+
+                {/* Bulk paste area */}
+                <div id="spec-paste-area" className="hidden mb-3">
+                  <textarea
+                    rows={6}
+                    className="w-full px-3 py-2 border border-blue-300 rounded-lg text-xs font-mono focus:outline-none focus:border-blue-500 bg-blue-50"
+                    placeholder={"Ngjit specifiikimet këtu (çdo rresht: Emri\tVlera ose Emri: Vlera)\n\nShembull:\nImage Sensor\t1/2.7\" CMOS\nIR Distance\tUp to 30 m"}
+                    onPaste={(e) => {
+                      e.preventDefault();
+                      const text = e.clipboardData.getData("text");
+                      const lines = text.split("\n").map(l => l.trim()).filter(Boolean);
+                      const parsed: string[] = [];
+                      for (const line of lines) {
+                        if (line.includes("\t")) {
+                          const [key, ...rest] = line.split("\t");
+                          if (key && rest.length) parsed.push(`${key.trim()}: ${rest.join(" ").trim()}`);
+                        } else if (line.includes(":")) {
+                          parsed.push(line.trim());
+                        }
+                      }
+                      if (parsed.length) {
+                        setEditing({ ...editing, specs: [...(editing.specs ?? []), ...parsed] });
+                        (e.target as HTMLTextAreaElement).value = `✓ ${parsed.length} specifikime u shtuan`;
+                        setTimeout(() => {
+                          const ta = document.getElementById("spec-paste-area");
+                          if (ta) ta.classList.add("hidden");
+                        }, 1500);
+                      }
+                    }}
+                  />
+                  <p className="text-xs text-gray-400 mt-1">Kopjo kolonën e specifikimeve nga faqja e prodhuesit dhe ngjite këtu</p>
+                </div>
+
                 <div className="flex gap-2 mb-2">
                   <input value={specInput} onChange={(e) => setSpecInput(e.target.value)}
                     onKeyDown={(e) => {
@@ -403,20 +447,36 @@ function ProductsTab({ categories }: { categories: Category[] }) {
                       }
                     }}
                     className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-blue-400"
-                    placeholder="Shtype specifikimet dhe shtypni Enter" />
+                    placeholder="Image Sensor: 1/2.7&quot; CMOS  (shtypni Enter)" />
                   <button onClick={() => { if (specInput.trim()) { setEditing({ ...editing, specs: [...(editing.specs ?? []), specInput.trim()] }); setSpecInput(""); } }}
                     className="px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm transition-colors">Shto</button>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {(editing.specs ?? []).map((s, i) => (
-                    <span key={i} className="flex items-center gap-1 px-2 py-1 bg-blue-50 text-blue-700 rounded text-xs">
-                      {s}
-                      <button onClick={() => setEditing({ ...editing, specs: (editing.specs ?? []).filter((_, j) => j !== i) })}>
-                        <X className="w-3 h-3" />
-                      </button>
-                    </span>
-                  ))}
+                <div className="rounded-xl border border-gray-200 overflow-hidden">
+                  {(editing.specs ?? []).length === 0 ? (
+                    <p className="text-xs text-gray-400 px-3 py-3">Ende nuk ka specifikimet.</p>
+                  ) : (
+                    (editing.specs ?? []).map((s, i) => {
+                      const colonIdx = s.indexOf(":");
+                      const label = colonIdx > 0 ? s.slice(0, colonIdx).trim() : null;
+                      const value = colonIdx > 0 ? s.slice(colonIdx + 1).trim() : s;
+                      return (
+                        <div key={i} className={`flex items-start gap-2 px-3 py-2 ${i % 2 === 0 ? "bg-white" : "bg-gray-50"} border-b border-gray-100 last:border-0`}>
+                          {label && <span className="text-xs font-semibold text-gray-600 w-40 shrink-0">{label}</span>}
+                          <span className="text-xs text-gray-700 flex-1">{value}</span>
+                          <button onClick={() => setEditing({ ...editing, specs: (editing.specs ?? []).filter((_, j) => j !== i) })} className="shrink-0 ml-1">
+                            <X className="w-3 h-3 text-gray-400 hover:text-red-500" />
+                          </button>
+                        </div>
+                      );
+                    })
+                  )}
                 </div>
+                {(editing.specs ?? []).length > 0 && (
+                  <button onClick={() => setEditing({ ...editing, specs: [] })}
+                    className="mt-2 text-xs text-red-400 hover:text-red-600">
+                    Fshi të gjitha specifikimet
+                  </button>
+                )}
               </div>
 
               <label className="flex items-center gap-2 cursor-pointer">
