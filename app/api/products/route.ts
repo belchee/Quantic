@@ -1,41 +1,60 @@
 import { NextRequest, NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
-
-const DATA_FILE = path.join(process.cwd(), "data", "products.json");
-
-async function readProducts() {
-  const raw = await fs.readFile(DATA_FILE, "utf8");
-  return JSON.parse(raw);
-}
-
-async function writeProducts(products: unknown[]) {
-  await fs.writeFile(DATA_FILE, JSON.stringify(products, null, 2));
-}
+import { supabase } from "@/lib/supabase";
 
 export async function GET() {
-  const products = await readProducts();
-  return NextResponse.json(products);
+  const { data, error } = await supabase
+    .from("products")
+    .select("*")
+    .order("created_at", { ascending: false });
+  if (error) return NextResponse.json([], { status: 500 });
+  return NextResponse.json((data ?? []).map(toClient));
 }
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  const products = await readProducts();
-  const newProduct = { ...body, id: body.id || body.model.toLowerCase().replace(/[^a-z0-9]/g, "-") };
-  const idx = products.findIndex((p: { id: string }) => p.id === newProduct.id);
-  if (idx >= 0) {
-    products[idx] = newProduct;
-  } else {
-    products.push(newProduct);
-  }
-  await writeProducts(products);
-  return NextResponse.json(newProduct);
+  const row = toRow(body);
+  const { data, error } = await supabase
+    .from("products")
+    .upsert(row, { onConflict: "id" })
+    .select()
+    .single();
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  return NextResponse.json(toClient(data));
 }
 
 export async function DELETE(req: NextRequest) {
   const { id } = await req.json();
-  const products = await readProducts();
-  const filtered = products.filter((p: { id: string }) => p.id !== id);
-  await writeProducts(filtered);
+  const { error } = await supabase.from("products").delete().eq("id", id);
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json({ ok: true });
+}
+
+function toRow(p: Record<string, unknown>) {
+  return {
+    id: p.id || String(p.model).toLowerCase().replace(/[^a-z0-9]/g, "-"),
+    name: p.name,
+    model: p.model,
+    category: p.category,
+    price: p.price,
+    original_price: p.originalPrice ?? null,
+    image: p.image ?? "",
+    short_desc: p.shortDesc ?? "",
+    specs: p.specs ?? [],
+    in_stock: p.inStock ?? true,
+  };
+}
+
+function toClient(r: Record<string, unknown>) {
+  return {
+    id: r.id,
+    name: r.name,
+    model: r.model,
+    category: r.category,
+    price: r.price,
+    originalPrice: r.original_price ?? undefined,
+    image: r.image,
+    shortDesc: r.short_desc,
+    specs: r.specs,
+    inStock: r.in_stock,
+  };
 }

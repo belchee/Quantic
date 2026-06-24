@@ -1,30 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
-
-const FILE = path.join(process.cwd(), "data", "brands.json");
-
-function read() {
-  return JSON.parse(fs.readFileSync(FILE, "utf-8"));
-}
+import { supabase } from "@/lib/supabase";
 
 export async function GET() {
-  return NextResponse.json(read());
+  const { data, error } = await supabase.from("brands").select("*").order("name");
+  if (error) return NextResponse.json([], { status: 500 });
+  return NextResponse.json(data ?? []);
 }
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  const brands = read();
-  const idx = brands.findIndex((b: { name: string }) => b.name === body.name);
-  if (idx >= 0) brands[idx] = body;
-  else brands.push(body);
-  fs.writeFileSync(FILE, JSON.stringify(brands, null, 2));
+  const { error } = await supabase.from("brands").upsert(body, { onConflict: "name" });
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json({ ok: true });
 }
 
 export async function DELETE(req: NextRequest) {
   const { name } = await req.json();
-  const brands = read().filter((b: { name: string }) => b.name !== name);
-  fs.writeFileSync(FILE, JSON.stringify(brands, null, 2));
+  const { error } = await supabase.from("brands").delete().eq("name", name);
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json({ ok: true });
 }
