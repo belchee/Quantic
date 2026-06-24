@@ -116,15 +116,14 @@ export default function ProductPageClient({ slug }: { slug: string }) {
               )}
             </div>
 
-            {/* Specs */}
+            {/* Key specs preview (first 4) */}
             {product.specs?.length > 0 && (
               <div className="mb-8">
-                <h3 className="text-gray-900 font-semibold text-xs mb-4 uppercase tracking-widest">{t.specs[lang]}</h3>
                 <ul className="space-y-2">
-                  {product.specs.map((spec, i) => (
+                  {product.specs.slice(0, 4).map((spec, i) => (
                     <li key={i} className="flex items-start gap-2">
                       <CheckCircle className="w-4 h-4 text-blue-500 mt-0.5 shrink-0" />
-                      <span className="text-gray-600 text-sm">{spec}</span>
+                      <span className="text-gray-600 text-sm">{spec.includes(":") ? spec.split(":").slice(1).join(":").trim() : spec}</span>
                     </li>
                   ))}
                 </ul>
@@ -159,6 +158,38 @@ export default function ProductPageClient({ slug }: { slug: string }) {
           </div>
         </div>
       </section>
+
+      {/* Full Specifications Table */}
+      {product.specs?.length > 0 && (
+        <section className="py-12 px-5 lg:px-8 border-t border-gray-100">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-xl font-bold text-gray-900 mb-6"
+              style={{ fontFamily: "var(--font-space-grotesk)" }}>
+              {t.specs[lang]}
+            </h2>
+            <div className="rounded-2xl border border-gray-200 overflow-hidden">
+              {product.specs.map((spec, i) => {
+                const colonIdx = spec.indexOf(":");
+                const hasColon = colonIdx > 0;
+                const label = hasColon ? spec.slice(0, colonIdx).trim() : null;
+                const value = hasColon ? spec.slice(colonIdx + 1).trim() : spec;
+                return (
+                  <div key={i} className={`flex flex-col sm:flex-row ${i % 2 === 0 ? "bg-white" : "bg-gray-50"}`}>
+                    {label && (
+                      <div className="sm:w-56 shrink-0 px-5 py-3.5 font-semibold text-sm text-gray-700 border-b sm:border-b-0 sm:border-r border-gray-200">
+                        {label}
+                      </div>
+                    )}
+                    <div className={`flex-1 px-5 py-3.5 text-sm text-gray-600 border-b border-gray-200 ${!label ? "col-span-2 font-medium text-gray-800" : ""}`}>
+                      {value}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Related */}
       {related.length > 0 && (
