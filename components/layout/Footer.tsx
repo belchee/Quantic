@@ -28,7 +28,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-5">
-              <Image src="/quantic-logo-light.svg" height={36} width={174} alt="Quantic" />
+              <Image src="/quantic-logo-light.svg" height={44} width={140} alt="Quantic" />
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
               Professional security and network solutions for businesses and homes in

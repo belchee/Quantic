@@ -35,7 +35,7 @@ export default function Navbar() {
 
           {/* Logo */}
           <Link href="/" className="flex-shrink-0 flex items-center gap-2 mr-2">
-            <Image src="/quantic-logo-light.svg" height={36} width={174} alt="Quantic" priority />
+            <Image src="/quantic-logo-light.svg" height={44} width={140} alt="Quantic" priority />
           </Link>
 
           {/* Search bar (prominent, pill) */}
