@@ -13,12 +13,16 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   const body = await req.json();
   const row = toRow(body);
+  console.log("[products POST] upserting row id:", row.id, "has service key:", !!process.env.SUPABASE_SERVICE_ROLE_KEY);
   const { data, error } = await supabaseAdmin
     .from("products")
     .upsert(row, { onConflict: "id" })
     .select()
     .single();
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) {
+    console.error("[products POST] supabase error:", error);
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
   return NextResponse.json(toClient(data));
 }
 

@@ -207,11 +207,17 @@ function ProductsTab({ categories }: { categories: Category[] }) {
       originalPrice: editing.originalPrice ? Number(editing.originalPrice) : undefined,
       id: editing.id || String(editing.model).toLowerCase().replace(/[^a-z0-9]/g, "-"),
     };
-    await fetch("/api/products", {
+    const res = await fetch("/api/products", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(product),
     });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      alert("Gabim gjatë ruajtjes: " + (err.error || res.status));
+      setSaving(false);
+      return;
+    }
     await load(); setEditing(null); setSaving(false);
   }
 
