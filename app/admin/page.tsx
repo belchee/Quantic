@@ -360,9 +360,23 @@ function ProductsTab({ categories }: { categories: Category[] }) {
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-gray-600 mb-1">Modeli *</label>
-                  <input value={editing.model ?? ""} onChange={(e) => setEditing({ ...editing, model: e.target.value })}
+                  <input value={editing.model ?? ""} onChange={(e) => {
+                    const model = e.target.value;
+                    const detected = ["Tiandy","Dahua","TVT"].find(b => model.toLowerCase().includes(b.toLowerCase())) ?? (editing as Record<string,unknown>).brand as string ?? "";
+                    setEditing({ ...editing, model, brand: detected } as typeof editing);
+                  }}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-blue-400"
                     placeholder="TC-C32WP-I3W" />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-600 mb-1">Brendi</label>
+                  <select value={(editing as Record<string,unknown>).brand as string ?? ""} onChange={(e) => setEditing({ ...editing, brand: e.target.value } as typeof editing)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-blue-400 bg-white">
+                    <option value="">— Zgjidh brendin —</option>
+                    <option value="Tiandy">Tiandy</option>
+                    <option value="Dahua">Dahua</option>
+                    <option value="TVT">TVT</option>
+                  </select>
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-gray-600 mb-1">Kategoria *</label>
