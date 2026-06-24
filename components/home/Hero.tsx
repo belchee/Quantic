@@ -69,33 +69,24 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Full-width image banner */}
-      <div className="w-full bg-gray-50 border-t border-gray-100">
-        <div className="max-w-7xl mx-auto px-5 lg:px-8 py-12">
-          <div className="relative w-full rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 overflow-hidden" style={{ minHeight: 340 }}>
-            {/* Subtle grid overlay */}
-            <div className="absolute inset-0 opacity-20" style={{
-              backgroundImage: "linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)",
-              backgroundSize: "60px 60px",
-            }} />
-
-            {/* Content */}
-            <div className="relative z-10 flex flex-col items-center justify-center h-full py-16 px-8 text-center">
-              <p className="text-white/40 text-xs font-semibold uppercase tracking-[0.2em] mb-8">Quantic SHPK</p>
-              <div className="flex flex-wrap items-center justify-center gap-8 mb-8">
-                <Image src="/brand-tvt.svg" alt="TVT" width={120} height={35} className="h-8 w-auto object-contain" />
-                <Image src="/brand-dahua.svg" alt="Dahua" width={120} height={35} className="h-8 w-auto object-contain" />
-                <Image src="/brand-tiandy.svg" alt="Tiandy" width={120} height={35} className="h-8 w-auto object-contain" />
-                <Image src="/brand-fourth.svg" alt="Brand" width={50} height={50} className="h-8 w-auto object-contain" />
-              </div>
-              <p className="text-white/50 text-sm max-w-lg leading-relaxed">
-                {tr("hero_partner_seller")}
-              </p>
-              <Link href="/products"
-                className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-gray-100 text-gray-900 font-semibold text-sm rounded-xl transition-colors">
-                {tr("hero_cta_primary")} <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
+      {/* Brand banner */}
+      <div className="w-full bg-white border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-5 lg:px-8 py-16">
+          <div className="text-center mb-10">
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-[0.2em] mb-2">Quantic SHPK</p>
+            <p className="text-gray-500 text-sm">{tr("hero_partner_seller")}</p>
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-12 lg:gap-16">
+            <Image src="/brand-tiandy.svg" alt="Tiandy" width={200} height={60} className="h-12 w-auto object-contain" />
+            <Image src="/brand-tvt.svg" alt="TVT" width={200} height={60} className="h-12 w-auto object-contain" />
+            <Image src="/brand-fourth.svg" alt="Brand" width={120} height={60} className="h-12 w-auto object-contain" />
+            <Image src="/brand-dahua.svg" alt="Dahua" width={200} height={60} className="h-12 w-auto object-contain" />
+          </div>
+          <div className="text-center mt-10">
+            <Link href="/products"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 hover:bg-black text-white font-semibold text-sm rounded-xl transition-colors">
+              {tr("hero_cta_primary")} <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </div>
