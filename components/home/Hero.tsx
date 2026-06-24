@@ -77,9 +77,9 @@ export default function Hero() {
             <p className="text-gray-500 text-sm">{tr("hero_partner_seller")}</p>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-12 lg:gap-16">
-            <Image src="/brand-tiandy.svg" alt="Tiandy" width={200} height={60} className="h-12 w-auto object-contain" />
-            <Image src="/brand-tvt.svg" alt="TVT" width={200} height={60} className="h-12 w-auto object-contain" />
-            <Image src="/brand-fourth.svg" alt="Brand" width={120} height={60} className="h-12 w-auto object-contain" />
+            <Image src="/brand-tiandy.svg" alt="Tiandy" width={200} height={60} className="h-10 w-auto max-w-[160px] object-contain" />
+            <Image src="/brand-tvt.svg" alt="TVT" width={200} height={60} className="h-10 w-auto max-w-[120px] object-contain" />
+            <Image src="/brand-fourth.svg" alt="Brand" width={120} height={60} className="h-10 w-auto max-w-[100px] object-contain" />
           </div>
           <div className="text-center mt-10">
             <Link href="/products"
