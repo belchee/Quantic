@@ -68,8 +68,8 @@ export default function ProductPageClient({ slug }: { slug: string }) {
     );
   }
 
-  const orig = product.originalPrice ?? Math.round(product.price * 1.2);
-  const disc = product.originalPrice ? Math.round(((orig - product.price) / orig) * 100) : 0;
+  const orig = product.originalPrice && product.originalPrice > product.price ? product.originalPrice : null;
+  const disc = orig ? Math.round(((orig - product.price) / orig) * 100) : 0;
 
   // Parse specs into {label, value} pairs
   const parsedSpecs = (product.specs ?? []).map((s) => {
@@ -124,7 +124,7 @@ export default function ProductPageClient({ slug }: { slug: string }) {
             {/* Price */}
             <div className="flex items-baseline gap-3 mb-5">
               <span className="text-3xl font-bold text-gray-900">{product.price.toFixed(2)} €</span>
-              {disc > 0 && (
+              {orig && disc > 0 && (
                 <>
                   <span className="text-base text-gray-400 line-through">{orig.toFixed(2)} €</span>
                   <span className="px-2 py-0.5 bg-gray-900 text-white text-xs font-bold rounded-md">-{disc}%</span>

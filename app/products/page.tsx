@@ -179,8 +179,8 @@ function ProductsInner() {
               ) : (
                 <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4">
                   {filtered.map((p) => {
-                    const orig = p.originalPrice ?? Math.round(p.price * 1.2);
-                    const disc = Math.round(((orig - p.price) / orig) * 100);
+                    const orig = p.originalPrice && p.originalPrice > p.price ? p.originalPrice : null;
+                    const disc = orig ? Math.round(((orig - p.price) / orig) * 100) : 0;
                     return (
                       <Link key={p.id} href={`/products/${p.id}`}
                         className="group flex flex-col bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-gray-300 hover:shadow-md transition-all duration-200">
@@ -197,7 +197,7 @@ function ProductsInner() {
                           <h3 className="text-gray-900 font-medium text-xs leading-snug line-clamp-2 mb-2.5 flex-1">{p.name}</h3>
                           <div className="flex items-baseline gap-2">
                             <span className="text-base font-bold text-gray-900">{p.price.toFixed(2).replace(".", ",")} €</span>
-                            {orig > p.price && (
+                            {orig && (
                               <span className="text-xs text-gray-400 line-through">{orig.toFixed(2).replace(".", ",")} €</span>
                             )}
                           </div>
