@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { supabase, supabaseAdmin } from "@/lib/supabase";
 
 export async function GET() {
   const { data, error } = await supabase.from("brands").select("*").order("name");
@@ -9,14 +9,14 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  const { error } = await supabase.from("brands").upsert(body, { onConflict: "name" });
+  const { error } = await supabaseAdmin.from("brands").upsert(body, { onConflict: "name" });
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json({ ok: true });
 }
 
 export async function DELETE(req: NextRequest) {
   const { name } = await req.json();
-  const { error } = await supabase.from("brands").delete().eq("name", name);
+  const { error } = await supabaseAdmin.from("brands").delete().eq("name", name);
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json({ ok: true });
 }

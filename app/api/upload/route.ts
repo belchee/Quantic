@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin } from "@/lib/supabase";
 
 export async function POST(req: NextRequest) {
   const formData = await req.formData();
@@ -10,12 +10,12 @@ export async function POST(req: NextRequest) {
   const filename = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
   const bytes = await file.arrayBuffer();
 
-  const { error } = await supabase.storage
+  const { error } = await supabaseAdmin.storage
     .from("products")
     .upload(filename, bytes, { contentType: file.type, upsert: false });
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
 
-  const { data } = supabase.storage.from("products").getPublicUrl(filename);
+  const { data } = supabaseAdmin.storage.from("products").getPublicUrl(filename);
   return NextResponse.json({ url: data.publicUrl });
 }
