@@ -6,6 +6,7 @@ import {
   Plus, Pencil, Trash2, X, Upload, Save, Package,
   LogOut, Lock, LayoutDashboard, Tag, Star, Image as ImageIcon,
   ChevronDown, ChevronUp, Eye, EyeOff, AlertCircle, ShoppingCart, CheckCircle, Clock, XCircle,
+  Users, Shield, RefreshCw,
 } from "lucide-react";
 
 /* ─── Types ─── */
@@ -31,10 +32,17 @@ const EMPTY_PRODUCT: Partial<Product> = {
 };
 
 /* ─── Auth helpers ─── */
-const TOKEN_KEY = "qs-admin-token-v2";
+const TOKEN_KEY = "qs-admin-token";
+const USER_KEY = "qs-admin-user";
 function getToken() { return typeof window !== "undefined" ? localStorage.getItem(TOKEN_KEY) : null; }
 function setToken(t: string) { localStorage.setItem(TOKEN_KEY, t); }
-function clearToken() { localStorage.removeItem(TOKEN_KEY); }
+function clearToken() { localStorage.removeItem(TOKEN_KEY); localStorage.removeItem(USER_KEY); }
+function setUserInfo(u: { username: string; role: string }) { localStorage.setItem(USER_KEY, JSON.stringify(u)); }
+function getUserInfo(): { username: string; role: string } | null {
+  if (typeof window === "undefined") return null;
+  try { return JSON.parse(localStorage.getItem(USER_KEY) ?? "null"); } catch { return null; }
+}
+function authHeader() { return { "x-admin-token": getToken() ?? "" }; }
 
 /* ══════════════════ LOGIN ══════════════════ */
 function LoginScreen({ onLogin }: { onLogin: () => void }) {
@@ -54,8 +62,11 @@ function LoginScreen({ onLogin }: { onLogin: () => void }) {
     });
     const data = await r.json();
     setLoading(false);
-    if (data.ok) { setToken(data.token); onLogin(); }
-    else setError(data.error || "Gabim gjatë hyrjes");
+    if (data.ok) {
+      setToken(data.token);
+      setUserInfo({ username: data.username, role: data.role });
+      onLogin();
+    } else setError(data.error || "Gabim gjatë hyrjes");
   }
 
   return (
@@ -126,7 +137,7 @@ function ChangePasswordModal({ onClose }: { onClose: () => void }) {
     const r = await fetch("/api/auth", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ action: "change-password", password: cur, newPassword: next }),
+      body: JSON.stringify({ action: "change-password", token: getToken(), password: cur, newPassword: next }),
     });
     const data = await r.json();
     setLoading(false);
@@ -1030,6 +1041,165 @@ function OrdersTab() {
   );
 }
 
+/* ══════════════════ USERS TAB (superadmin only) ══════════════════ */
+interface AdminUser { id: string; username: string; role: string; created_at: string }
+
+function UsersTab() {
+  const [users, setUsers] = useState<AdminUser[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [newUsername, setNewUsername] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [newRole, setNewRole] = useState("admin");
+  const [adding, setAdding] = useState(false);
+  const [resetId, setResetId] = useState<string | null>(null);
+  const [resetPw, setResetPw] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  async function load() {
+    setLoading(true);
+    const r = await fetch("/api/admin-users", { headers: authHeader() });
+    setUsers(await r.json());
+    setLoading(false);
+  }
+  useEffect(() => { load(); }, []);
+
+  async function addUser(e: React.FormEvent) {
+    e.preventDefault();
+    setAdding(true); setError(""); setSuccess("");
+    const r = await fetch("/api/admin-users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", ...authHeader() },
+      body: JSON.stringify({ username: newUsername, password: newPassword, role: newRole }),
+    });
+    const d = await r.json();
+    setAdding(false);
+    if (r.ok) {
+      setNewUsername(""); setNewPassword(""); setNewRole("admin");
+      setSuccess(`Përdoruesi "${d.username}" u krijua me sukses.`);
+      load();
+    } else setError(d.error || "Gabim gjatë krijimit");
+  }
+
+  async function deleteUser(id: string, username: string) {
+    if (!confirm(`Fshi përdoruesin "${username}"?`)) return;
+    const r = await fetch("/api/admin-users", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json", ...authHeader() },
+      body: JSON.stringify({ id }),
+    });
+    if (r.ok) { setSuccess(`"${username}" u fshi.`); load(); }
+    else { const d = await r.json(); setError(d.error || "Gabim"); }
+  }
+
+  async function resetPassword(id: string) {
+    if (!resetPw) return;
+    const r = await fetch("/api/admin-users", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json", ...authHeader() },
+      body: JSON.stringify({ id, password: resetPw }),
+    });
+    if (r.ok) { setSuccess("Fjalëkalimi u ndryshua."); setResetId(null); setResetPw(""); }
+    else { const d = await r.json(); setError(d.error || "Gabim"); }
+  }
+
+  return (
+    <div className="max-w-2xl">
+      {error && <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700 flex items-center gap-2"><AlertCircle className="w-4 h-4 shrink-0" />{error}</div>}
+      {success && <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg text-sm text-green-700 flex items-center gap-2"><CheckCircle className="w-4 h-4 shrink-0" />{success}</div>}
+
+      {/* Add user form */}
+      <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-6">
+        <h2 className="font-semibold text-gray-900 mb-4 flex items-center gap-2"><Plus className="w-4 h-4" /> Shto përdorues të ri</h2>
+        <form onSubmit={addUser} className="space-y-3">
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-semibold text-gray-600 mb-1">Emri i përdoruesit</label>
+              <input value={newUsername} onChange={e => setNewUsername(e.target.value)} required
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-blue-500"
+                placeholder="emri" />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-gray-600 mb-1">Roli</label>
+              <select value={newRole} onChange={e => setNewRole(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-blue-500">
+                <option value="admin">Admin</option>
+                <option value="superadmin">Super Admin</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-gray-600 mb-1">Fjalëkalimi</label>
+            <input type="password" value={newPassword} onChange={e => setNewPassword(e.target.value)} required
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-blue-500"
+              placeholder="••••••••" />
+          </div>
+          <button type="submit" disabled={adding}
+            className="px-5 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-semibold text-sm rounded-lg transition-colors">
+            {adding ? "Duke shtuar..." : "Shto përdoruesin"}
+          </button>
+        </form>
+      </div>
+
+      {/* Users list */}
+      <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+        <div className="px-6 py-4 border-b border-gray-100">
+          <h2 className="font-semibold text-gray-900 flex items-center gap-2"><Users className="w-4 h-4" /> Përdoruesit aktualë</h2>
+        </div>
+        {loading ? (
+          <div className="p-6 text-center text-gray-400 text-sm">Duke ngarkuar...</div>
+        ) : (
+          <ul className="divide-y divide-gray-100">
+            {users.map(u => (
+              <li key={u.id} className="px-6 py-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold shrink-0">
+                    {u.username[0].toUpperCase()}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium text-gray-900 text-sm">{u.username}</p>
+                    <p className="text-xs text-gray-400">{new Date(u.created_at).toLocaleDateString("sq")}</p>
+                  </div>
+                  <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${u.role === "superadmin" ? "bg-purple-100 text-purple-700" : "bg-blue-50 text-blue-600"}`}>
+                    {u.role === "superadmin" ? "Super Admin" : "Admin"}
+                  </span>
+                  {u.role !== "superadmin" && (
+                    <div className="flex items-center gap-1 ml-2">
+                      <button onClick={() => { setResetId(resetId === u.id ? null : u.id); setResetPw(""); }}
+                        className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors" title="Ndrysho fjalëkalimin">
+                        <RefreshCw className="w-3.5 h-3.5" />
+                      </button>
+                      <button onClick={() => deleteUser(u.id, u.username)}
+                        className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors" title="Fshi">
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  )}
+                </div>
+                {resetId === u.id && (
+                  <div className="mt-3 flex gap-2 pl-11">
+                    <input type="password" value={resetPw} onChange={e => setResetPw(e.target.value)}
+                      placeholder="Fjalëkalimi i ri" autoFocus
+                      className="flex-1 px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-blue-500" />
+                    <button onClick={() => resetPassword(u.id)} disabled={!resetPw}
+                      className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white text-xs font-semibold rounded-lg transition-colors">
+                      Ruaj
+                    </button>
+                    <button onClick={() => setResetId(null)}
+                      className="px-3 py-1.5 border border-gray-300 text-gray-600 text-xs font-semibold rounded-lg hover:bg-gray-50 transition-colors">
+                      Anulo
+                    </button>
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
+  );
+}
+
 const TABS = [
   { id: "orders", label: "Porositë", icon: ShoppingCart },
   { id: "products", label: "Produktet", icon: Package },
@@ -1038,11 +1208,14 @@ const TABS = [
   { id: "hero", label: "Faqja kryesore", icon: ImageIcon },
 ];
 
+const SUPERADMIN_TABS = [...TABS, { id: "users", label: "Përdoruesit", icon: Users }];
+
 function Dashboard({ onLogout }: { onLogout: () => void }) {
   const [tab, setTab] = useState("orders");
   const [categories, setCategories] = useState<Category[]>([]);
   const [showChangePw, setShowChangePw] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const userInfo = getUserInfo();
 
   async function loadCategories() {
     const r = await fetch("/api/categories");
@@ -1055,13 +1228,17 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
       {/* Top nav */}
       <header className="fixed top-0 inset-x-0 z-40 bg-white border-b border-gray-200 shadow-sm h-16 flex items-center px-4 lg:px-8 gap-4">
         <Image src="/quantic-logo-light.svg" width={120} height={38} alt="Quantic" />
-        <span className="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded uppercase tracking-wide">Admin</span>
+        <span className={`text-xs font-bold px-2 py-0.5 rounded uppercase tracking-wide ${userInfo?.role === "superadmin" ? "bg-purple-100 text-purple-700" : "bg-blue-50 text-blue-600"}`}>
+          {userInfo?.role === "superadmin" ? "Super Admin" : "Admin"}
+        </span>
         <div className="flex-1" />
         <div className="relative">
           <button onClick={() => setUserMenuOpen(!userMenuOpen)}
             className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors text-sm font-medium text-gray-700">
-            <div className="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold">A</div>
-            admin
+            <div className={`w-7 h-7 rounded-full text-white flex items-center justify-center text-xs font-bold ${userInfo?.role === "superadmin" ? "bg-purple-600" : "bg-blue-600"}`}>
+              {(userInfo?.username ?? "A")[0].toUpperCase()}
+            </div>
+            {userInfo?.username ?? "admin"}
             {userMenuOpen ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
           </button>
           {userMenuOpen && (
@@ -1084,7 +1261,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
         {/* Sidebar */}
         <aside className="hidden md:flex flex-col w-56 bg-white border-r border-gray-200 fixed left-0 top-16 bottom-0">
           <nav className="flex-1 px-3 py-4 space-y-1">
-            {TABS.map((t) => {
+            {(userInfo?.role === "superadmin" ? SUPERADMIN_TABS : TABS).map((t) => {
               const Icon = t.icon;
               return (
                 <button key={t.id} onClick={() => setTab(t.id)}
@@ -1107,7 +1284,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
 
         {/* Mobile tab bar */}
         <div className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-white border-t border-gray-200 flex">
-          {TABS.map((t) => {
+          {(userInfo?.role === "superadmin" ? SUPERADMIN_TABS : TABS).map((t) => {
             const Icon = t.icon;
             return (
               <button key={t.id} onClick={() => setTab(t.id)}
@@ -1131,6 +1308,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
           {tab === "categories" && <CategoriesTab categories={categories} onReload={loadCategories} />}
           {tab === "brands" && <BrandsTab />}
           {tab === "hero" && <HeroTab />}
+          {tab === "users" && userInfo?.role === "superadmin" && <UsersTab />}
         </main>
       </div>
 
@@ -1151,7 +1329,12 @@ export default function AdminPage() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ action: "verify", token }),
-    }).then(r => r.json()).then(d => setAuthed(!!d.ok)).catch(() => setAuthed(false));
+    }).then(r => r.json()).then(d => {
+      if (d.ok) {
+        setUserInfo({ username: d.username, role: d.role });
+        setAuthed(true);
+      } else setAuthed(false);
+    }).catch(() => setAuthed(false));
   }, []);
 
   if (authed === null) return null;
