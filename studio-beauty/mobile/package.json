@@ -56,7 +56,8 @@
     "lint": "expo lint",
     "test": "vitest run",
     "check:release": "node scripts/check-release.mjs",
-    "gen:types": "supabase gen types typescript --linked --schema public > src/types/database.gen.ts"
+    "gen:types": "supabase gen types typescript --linked --schema public > src/types/database.gen.ts",
+    "eas-build-pre-install": "node scripts/check-release.mjs"
   },
   "private": true
 }

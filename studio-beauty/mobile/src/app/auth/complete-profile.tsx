@@ -1,5 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { router } from 'expo-router';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { View } from 'react-native';
@@ -7,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { Banner, Button, Input } from '@/components/ui';
 import { AuthShell } from '@/features/auth/AuthShell';
 import { useAuth } from '@/features/auth/AuthProvider';
+import { closeAuthModal } from '@/features/auth/finish';
 import { profileSchema, type ProfileInput } from '@/features/auth/schemas';
 import { errorCode } from '@/lib/errors';
 import { space } from '@/theme/tokens';
@@ -28,8 +28,7 @@ export default function CompleteProfile() {
       const v = profileSchema.parse(values);
       if (v.fullName !== profile?.full_name) await updateProfile({ full_name: v.fullName });
       if (v.phone !== profile?.phone) await changePhone(v.phone);
-      if (router.canDismiss()) router.dismissAll();
-      else router.replace('/');
+      closeAuthModal();
     } catch (e) {
       setError(t(`errors.${errorCode(e)}`));
     }

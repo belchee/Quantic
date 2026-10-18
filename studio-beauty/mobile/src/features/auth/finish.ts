@@ -4,6 +4,8 @@ import { supabase } from '@/lib/supabase';
 /**
  * After signing in: ask for missing name/phone, otherwise close the auth modal
  * and return the user to where they were (e.g. the booking confirmation).
+ * The auth stack always holds a single screen (screens `replace` each other), so
+ * GO_BACK bubbles up and pops just the modal; dismissAll() would pop to Home.
  */
 export async function finishAuth() {
   const { data } = await supabase.auth.getUser();
@@ -13,6 +15,10 @@ export async function finishAuth() {
     router.replace('/auth/complete-profile');
     return;
   }
-  if (router.canDismiss()) router.dismissAll();
+  closeAuthModal();
+}
+
+export function closeAuthModal() {
+  if (router.canGoBack()) router.back();
   else router.replace('/');
 }
