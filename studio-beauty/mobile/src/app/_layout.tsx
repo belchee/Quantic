@@ -12,6 +12,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import * as SystemUI from 'expo-system-ui';
 import { useEffect, useState } from 'react';
+import { Platform } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import '@/i18n';
@@ -64,7 +65,6 @@ function RootNavigator() {
   const { ready, isOwner, profileLoading } = useAuth();
   const { colors, scheme } = useTheme();
   const stackOptions = useStackOptions();
-  usePushRouting();
 
   const loading = !ready || profileLoading;
 
@@ -81,6 +81,7 @@ function RootNavigator() {
   return (
     <>
       <StatusBar style={scheme === 'dark' ? 'light' : 'dark'} />
+      {Platform.OS !== 'web' && <PushRouting />}
       <Stack screenOptions={stackOptions}>
         {/* Customers and guests */}
         <Stack.Protected guard={!isOwner}>
@@ -99,4 +100,10 @@ function RootNavigator() {
       </Stack>
     </>
   );
+}
+
+/** Push registration + notification taps (native only). */
+function PushRouting() {
+  usePushRouting();
+  return null;
 }
