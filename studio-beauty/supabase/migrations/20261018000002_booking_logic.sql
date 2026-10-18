@@ -648,3 +648,87 @@ $$;
 create trigger on_auth_user_created
   after insert on auth.users
   for each row execute function public.handle_new_user();
+
+-- ─── Computed fields (PostgREST: select=*,local_date,local_time) ────────────
+-- The app never converts time zones itself: it displays these strings.
+create or replace function public.local_date(b public.bookings)
+returns text
+language sql
+stable
+set search_path = ''
+as $$
+  select to_char(b.slot_start at time zone (select timezone from public.business_settings where id), 'YYYY-MM-DD');
+$$;
+
+create or replace function public.local_time(b public.bookings)
+returns text
+language sql
+stable
+set search_path = ''
+as $$
+  select to_char(b.slot_start at time zone (select timezone from public.business_settings where id), 'HH24:MI');
+$$;
+
+create or replace function public.local_date(b public.blocks)
+returns text
+language sql
+stable
+set search_path = ''
+as $$
+  select to_char(b.starts_at at time zone (select timezone from public.business_settings where id), 'YYYY-MM-DD');
+$$;
+
+create or replace function public.local_range(b public.blocks)
+returns text
+language sql
+stable
+set search_path = ''
+as $$
+  select to_char(b.starts_at at time zone s.timezone, 'YYYY-MM-DD HH24:MI') || ' – ' ||
+         to_char(b.ends_at   at time zone s.timezone, 'YYYY-MM-DD HH24:MI')
+  from public.business_settings s where s.id;
+$$;
+
+-- Owner timeline / week view: bookings between two local dates (inclusive),
+-- with client details and Skopje-local date & time.
+create or replace function public.owner_bookings(p_from date, p_to date)
+returns table (
+  id            uuid,
+  slot_start    timestamptz,
+  local_date    text,
+  local_time    text,
+  status        public.booking_status,
+  client_name   text,
+  client_phone  text,
+  is_guest      boolean,
+  service_id    uuid,
+  notes         text
+)
+language plpgsql
+stable
+security definer
+set search_path = ''
+as $$
+declare
+  v_tz text := (select s.timezone from public.business_settings s where s.id);
+begin
+  if not public.is_owner() then
+    raise exception 'NOT_ALLOWED' using errcode = 'P0001';
+  end if;
+  if p_to < p_from or p_to - p_from > 62 then
+    raise exception 'RANGE_INVALID' using errcode = 'P0001';
+  end if;
+  return query
+  select b.id, b.slot_start,
+         to_char(b.slot_start at time zone v_tz, 'YYYY-MM-DD'),
+         to_char(b.slot_start at time zone v_tz, 'HH24:MI'),
+         b.status,
+         coalesce(p.full_name, b.guest_name, ''), coalesce(p.phone, b.guest_phone),
+         b.customer_id is null, b.service_id, b.notes
+  from public.bookings b
+  left join public.profiles p on p.id = b.customer_id
+  where b.slot_start >= p_from::timestamp at time zone v_tz
+    and b.slot_start <  (p_to + 1)::timestamp at time zone v_tz
+  order by b.slot_start, b.created_at;
+end;
+$$;

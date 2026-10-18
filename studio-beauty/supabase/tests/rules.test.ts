@@ -146,3 +146,26 @@ describe('owner free time (blocks)', () => {
     expect(seen.rowCount).toBe(0);
   });
 });
+
+describe('owner day view & computed fields', () => {
+  it('returns the day timeline in Skopje time with client details, owner only', async () => {
+    const owner = await createUser({ role: 'owner' });
+    const u = await createUser({ name: 'Blerta' });
+    const day = await localDay(2);
+    const slot = await slotAt(day, '06:00');
+    await book(u, slot, serviceId);
+    await asUser(owner, (c) =>
+      c.query(`select public.owner_create_booking($1, $2, null, 'Phone Client', '+38970123123')`, [slot, serviceId]),
+    );
+    const rows = await asUser(owner, async (c) => (await c.query(`select * from public.owner_bookings($1::date, $1::date)`, [day])).rows);
+    expect(rows).toHaveLength(2);
+    expect(rows[0]).toMatchObject({ local_date: day, local_time: '06:00', client_name: 'Blerta', client_phone: u.phone, is_guest: false });
+    expect(rows[1]).toMatchObject({ local_time: '06:00', client_name: 'Phone Client', client_phone: '+38970123123', is_guest: true });
+    expect(await errorCode(asUser(u, (c) => c.query(`select * from public.owner_bookings($1::date, $1::date)`, [day])))).toBe('NOT_ALLOWED');
+
+    const mine = await asUser(u, async (c) =>
+      (await c.query(`select b.id, public.local_date(b) d, public.local_time(b) t from public.bookings b`)).rows,
+    );
+    expect(mine[0]).toMatchObject({ d: day, t: '06:00' });
+  });
+});

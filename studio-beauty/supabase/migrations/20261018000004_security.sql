@@ -96,6 +96,11 @@ grant execute on function public.owner_set_booking_status(uuid, public.booking_s
 grant execute on function public.owner_create_block(date, date, time, time, text)               to authenticated;
 grant execute on function public.owner_stats()                             to authenticated;
 grant execute on function public.register_push_token(text, text)           to authenticated;
+grant execute on function public.owner_bookings(date, date)               to authenticated;
+grant execute on function public.local_date(public.bookings)               to authenticated;
+grant execute on function public.local_time(public.bookings)               to authenticated;
+grant execute on function public.local_date(public.blocks)                 to authenticated;
+grant execute on function public.local_range(public.blocks)                to authenticated;
 grant execute on function public.unregister_push_token(text)               to authenticated;
 -- Service role (Edge Functions / cron) only:
 grant execute on function public.enqueue_due_reminders()          to service_role;
